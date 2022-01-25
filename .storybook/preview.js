@@ -11,6 +11,15 @@ export const parameters = {
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "assets/styles/themes";
 import GlobalStyle from "assets/styles/globalStyles";
+import { MemoryRouter } from "react-router-dom";
+
+const withMemoryRouter = (Story, context) => {
+  return (
+    <MemoryRouter>
+      <Story {...context} />
+    </MemoryRouter>
+  );
+};
 
 export const globalTypes = {
   theme: {
@@ -43,4 +52,5 @@ const withThemeProvider = (Story, context) => {
     </ThemeProvider>
   );
 };
-export const decorators = [withThemeProvider];
+
+export const decorators = [withMemoryRouter, withThemeProvider];
