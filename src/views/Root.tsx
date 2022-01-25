@@ -1,5 +1,7 @@
+import ThemesProvider from "providers/ThemesProvider";
+
 function Root() {
-  return <div className="App"></div>;
+  return <ThemesProvider></ThemesProvider>;
 }
 
 export default Root;
