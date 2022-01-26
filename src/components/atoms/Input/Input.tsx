@@ -7,7 +7,7 @@ export const Input = styled.input`
   border: 1px solid ${({ theme }) => theme.colors.neutral[300]};
   background-color: ${({ theme }) => theme.colors.neutral[200]};
   color: ${({ theme }) => theme.colors.neutral[900]};
-  font-size: 0.9375rem;
+  font-size: ${({ theme }) => theme.fontSize.s};
   font-weight: 700;
   caret-color: ${({ theme }) => theme.colors.primary[500]};
   &:focus {
