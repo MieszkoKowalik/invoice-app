@@ -1,6 +1,7 @@
 import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "assets/styles/themes";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import GlobalStyle from "assets/styles/globalStyles";
 
 type Props = {
   children?: ReactNode;
@@ -48,6 +49,7 @@ const ThemesProvider = ({ children }: Props) => {
   return (
     <ThemesContext.Provider value={{ isDarkMode, toggleTheme }}>
       <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
+        <GlobalStyle />
         {children}
       </ThemeProvider>
     </ThemesContext.Provider>
