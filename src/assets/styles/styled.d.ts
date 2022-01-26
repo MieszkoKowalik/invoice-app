@@ -12,6 +12,13 @@ declare module "styled-components" {
       l: string;
       xl: string;
     };
+    fontSize: {
+      xs: string;
+      s: string;
+      m: string;
+      l: string;
+      xl: string;
+    };
 
     colors: {
       primary: {

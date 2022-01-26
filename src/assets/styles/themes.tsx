@@ -7,6 +7,13 @@ const theme = {
     l: "(min-width:1024px)",
     xl: "(min-width:1200px)",
   },
+  fontSize: {
+    xs: "0.6875rem",
+    s: "0.75rem",
+    m: "1rem",
+    l: "1.25rem",
+    xl: "2rem",
+  },
 };
 
 export const lightTheme: DefaultTheme = {
