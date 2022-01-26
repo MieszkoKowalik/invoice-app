@@ -12,7 +12,7 @@ interface ThemesContextInterface {
   toggleTheme: () => void;
 }
 
-const ThemesContext = createContext<ThemesContextInterface>(
+export const ThemesContext = createContext<ThemesContextInterface>(
   {} as ThemesContextInterface
 );
 
