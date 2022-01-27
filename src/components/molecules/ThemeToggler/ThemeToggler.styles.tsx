@@ -10,7 +10,7 @@ export const StyledLabel = styled.label`
     theme.mode === "light" ? "flex-end" : "flex-start"};
   cursor: pointer;
   svg {
-    fill: ${({ theme }) => theme.colors.neutral[500]};
+    fill: ${({ theme }) => theme.colors.neutral[400]};
     transition: fill 0.2s;
   }
   &:hover svg {

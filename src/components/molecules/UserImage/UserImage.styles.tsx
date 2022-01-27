@@ -1,9 +1,8 @@
 import styled from "styled-components";
-import { darkTheme } from "assets/styles/themes";
 export const Wrapper = styled.div`
   aspect-ratio: 1;
   width: 32px;
-  background-color: ${darkTheme.colors.neutral[600]};
+  background-color: ${({ theme }) => theme.colors.neutral[300]};
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -15,7 +14,7 @@ export const Wrapper = styled.div`
   }
   svg {
     height: 70%;
-    fill: ${darkTheme.colors.neutral[300]};
+    fill: ${({ theme }) => theme.colors.neutral[600]};
   }
   img {
     width: 100%;

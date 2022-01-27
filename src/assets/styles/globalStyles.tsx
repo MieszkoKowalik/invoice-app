@@ -28,7 +28,7 @@ body {
 	font-family: 'Spartan', sans-serif;
 	font-weight: 500;
   min-height:100vh;
-  background-color: ${({ theme }) => theme.colors.neutral[200]}
+  background-color: ${({ theme }) => theme.colors.neutral[100]}
 	}
 `;
 

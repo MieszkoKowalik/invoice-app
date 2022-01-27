@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { darkTheme } from "assets/styles/themes";
 
 export const Wrapper = styled.div`
-  background-color: ${darkTheme.colors.neutral[300]};
+  background-color: ${({ theme }) => theme.colors.neutral[800]};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,13 +19,13 @@ export const UserWrapper = styled.div`
   justify-content: center;
   padding: 0 32px;
   height: 100%;
-  border-left: 1px solid ${darkTheme.colors.neutral[500]};
+  border-left: 1px solid ${({ theme }) => theme.colors.neutral[400]};
   @media ${({ theme }) => theme.breakpoints.xl} {
     height: unset;
     border: unset;
     padding: 24px;
     width: 100%;
-    border-top: 1px solid ${darkTheme.colors.neutral[500]};
+    border-top: 1px solid ${({ theme }) => theme.colors.neutral[400]};
   } ;
 `;
 export const Panel = styled.div`
@@ -50,7 +50,7 @@ export const LogoWrapper = styled.div`
   height: 72px;
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: ${darkTheme.colors.primary[500]};
+  background-color: ${({ theme }) => theme.colors.primary[500]};
   font-size: 0;
 
   &::before {
