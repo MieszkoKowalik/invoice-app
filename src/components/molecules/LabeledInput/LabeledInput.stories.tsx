@@ -13,4 +13,10 @@ const Template: ComponentStory<typeof LabeledInput> = (args) => (
 export const Default = Template.bind({});
 Default.args = {
   label: "Label",
+  error: "",
+};
+export const Error = Template.bind({});
+Error.args = {
+  label: "Label",
+  error: "This is an error message",
 };

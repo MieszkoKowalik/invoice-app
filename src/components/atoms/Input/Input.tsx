@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-export const Input = styled.input`
+interface Props {
+  error?: string;
+}
+
+export const Input = styled.input<Props>`
   padding: 16px 20px;
   width: 100%;
   border-radius: 4px;
@@ -14,11 +18,14 @@ export const Input = styled.input`
     outline: none;
     border-color: ${({ theme }) => theme.colors.primary[500]};
   }
-  &:invalid {
-    border-color: ${({ theme }) => theme.colors.error[500]};
-  }
+
   &::placeholder {
     color: ${({ theme }) => theme.colors.neutral[900]};
     opacity: 0.6;
   }
+  ${({ error }) =>
+    error &&
+    css`
+      border-color: ${({ theme }) => theme.colors.error[500]};
+    `}
 `;
