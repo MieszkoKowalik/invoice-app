@@ -51,7 +51,7 @@ export const lightTheme: DefaultTheme = {
       700: "hsl(29, 80%, 44%)",
       900: "hsl(22, 82%, 30%)",
     },
-    error: {
+    danger: {
       100: "hsl(0, 100%, 95%)",
       300: "hsl(0, 100%, 80%)",
       500: "hsl(356, 75%, 53%)",
@@ -97,7 +97,7 @@ export const darkTheme: DefaultTheme = {
       700: "hsl(48, 94%, 68%)",
       900: "hsl(48, 100%, 88%)",
     },
-    error: {
+    danger: {
       100: "hsl(351, 56%, 7%)",
       300: "hsl(354, 84%, 18%)",
       500: "hsl(356, 75%, 53%)",

@@ -26,6 +26,6 @@ export const Input = styled.input<Props>`
   ${({ error }) =>
     error &&
     css`
-      border-color: ${({ theme }) => theme.colors.error[500]};
+      border-color: ${({ theme }) => theme.colors.danger[500]};
     `}
 `;

@@ -52,7 +52,7 @@ declare module "styled-components" {
         700: string;
         900: string;
       };
-      error: {
+      danger: {
         100: string;
         300: string;
         500: string;

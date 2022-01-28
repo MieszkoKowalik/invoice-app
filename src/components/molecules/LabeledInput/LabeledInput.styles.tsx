@@ -14,7 +14,7 @@ export const StyledLabel = styled.label<Props>`
   ${({ error }) =>
     error &&
     css`
-      color: ${({ theme }) => theme.colors.error[700]};
+      color: ${({ theme }) => theme.colors.danger[700]};
     `}
   span {
     font-weight: 600;
