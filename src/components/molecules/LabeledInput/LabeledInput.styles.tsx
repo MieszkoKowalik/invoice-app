@@ -10,16 +10,19 @@ export const StyledLabel = styled.label<Props>`
   gap: 10px;
   font-size: ${({ theme }) => theme.fontSize.s};
   color: ${({ theme }) => theme.colors.neutral[600]};
-  position: relative;
   ${({ error }) =>
     error &&
     css`
       color: ${({ theme }) => theme.colors.danger[700]};
     `}
-  span {
-    font-weight: 600;
-    position: absolute;
-    top: 0;
-    right: 0;
-  }
+`;
+export const ErrorSpan = styled.span`
+  font-size: ${({ theme }) => theme.fontSize.xs};
+  font-weight: 600;
+`;
+export const LabelWrapper = styled.span`
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+  justify-content: space-between;
 `;
