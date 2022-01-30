@@ -7,5 +7,9 @@ export const Grid = styled.div`
   @media ${({ theme }) => theme.breakpoints.xl} {
     grid-template-rows: auto;
     grid-template-columns: auto 1fr;
-  } ;
+  }
+  main {
+    display: grid;
+    padding: 24px;
+  }
 `;
