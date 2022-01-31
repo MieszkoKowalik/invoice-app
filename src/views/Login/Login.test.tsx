@@ -1,8 +1,6 @@
 import { render, screen } from "test-utils";
 import userEvent from "@testing-library/user-event";
-
 import Login from "./Login";
-import { waitFor } from "@testing-library/react";
 
 describe("Login view", () => {
   it("Renders the component", () => {
@@ -24,18 +22,15 @@ describe("Login view", () => {
       await screen.findByText(/Please enter valid email/i)
     ).toBeInTheDocument();
   });
-  it("Does not display errors if both inputs are valid", async () => {
+  it("Signs in user if entered valid email and password", async () => {
     render(<Login />);
-    userEvent.type(screen.getByLabelText(/email/i), "test@test.pl");
-    userEvent.type(screen.getByLabelText(/password/i), "test");
+    userEvent.type(screen.getByLabelText(/email/i), "test123@test123.com");
+    userEvent.type(screen.getByLabelText(/password/i), "Test123");
     userEvent.click(screen.getByText(/log in/i));
-    await waitFor(() => {
-      expect(
-        screen.queryByText(/Please enter valid email/i)
-      ).not.toBeInTheDocument();
-    });
-    await waitFor(() => {
-      expect(screen.queryByText(/can't be empty/i)).not.toBeInTheDocument();
-    });
+    expect(await screen.findByText(/sign out/i)).toBeInTheDocument();
+    expect(
+      screen.queryByText(/Please enter valid email/i)
+    ).not.toBeInTheDocument();
+    expect(screen.queryByText(/can't be empty/i)).not.toBeInTheDocument();
   });
 });

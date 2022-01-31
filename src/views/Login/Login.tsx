@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Button } from "components/atoms/Button/Button";
 import { LoginWrapper } from "./Login.styles";
 import * as yup from "yup";
+import { useAuth } from "providers/AuthProvider";
 
 type Props = {};
 
@@ -29,7 +30,9 @@ const Login = (props: Props) => {
     handleSubmit,
   } = useForm<FormInputs>({ resolver: yupResolver(schema) });
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => console.log(data);
+  const { user, logIn, logOut } = useAuth();
+
+  const onSubmit: SubmitHandler<FormInputs> = (data) => logIn(data);
 
   return (
     <>
@@ -45,7 +48,14 @@ const Login = (props: Props) => {
           error={errors.password?.message}
           label="Password"
         ></LabeledInput>
-        <Button variant="primary">Log in</Button>
+        <Button type="submit" variant="primary">
+          Log in
+        </Button>
+        {user ? (
+          <button type="button" onClick={logOut}>
+            Sign Out
+          </button>
+        ) : null}
       </LoginWrapper>
     </>
   );
