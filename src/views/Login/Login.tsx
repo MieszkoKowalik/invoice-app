@@ -6,6 +6,8 @@ import { LoginWrapper } from "./Login.styles";
 import * as yup from "yup";
 import { useAuth } from "providers/AuthProvider";
 import { useNavigate, useLocation } from "react-router-dom";
+import { useState } from "react";
+import { Alert } from "components/molecules/Alert/Alert";
 type Props = {};
 
 interface FormInputs {
@@ -47,8 +49,10 @@ const Login = (props: Props) => {
     navigate(from, { replace: true });
   };
 
+  const [alert, setAlert] = useState("");
+
   const onSubmit: SubmitHandler<FormInputs> = (data) =>
-    logIn(data, navigateToPreviousPage);
+    logIn(data, navigateToPreviousPage, setAlert);
 
   return (
     <>
@@ -67,11 +71,7 @@ const Login = (props: Props) => {
         <Button type="submit" variant="primary">
           Log in
         </Button>
-        {user ? (
-          <button type="button" onClick={logOut}>
-            Sign Out
-          </button>
-        ) : null}
+        {alert.length ? <Alert variant="danger">{alert}</Alert> : null}
       </LoginWrapper>
     </>
   );

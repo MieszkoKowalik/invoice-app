@@ -12,13 +12,15 @@ import {
 } from "firebase/auth";
 import { User } from "@firebase/auth";
 import { auth } from "../firebase";
+import { handleFirebaseAuthError } from "helpers/handleFirebaseAuthError";
 
 interface AuthContextInterface {
   user: User | null;
   isAuthLoading: boolean;
   logIn: (
     data: { email: string; password: string },
-    onSuccess: VoidFunction
+    onSuccess: VoidFunction,
+    onError: Function
   ) => void;
   logOut: () => void;
 }
@@ -37,16 +39,16 @@ const AuthProvider = ({ children }: Props) => {
 
   const logIn = (
     { email, password }: { email: string; password: string },
-    onSuccess: VoidFunction
+    onSuccess: VoidFunction,
+    onError: Function
   ) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         onSuccess();
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        const message = handleFirebaseAuthError(error.code);
+        onError(message);
       });
   };
 
