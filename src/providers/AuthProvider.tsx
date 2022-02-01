@@ -3,17 +3,15 @@ import {
   ReactNode,
   useEffect,
   useState,
-  useMemo,
   useContext,
 } from "react";
 import {
-  getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
-  connectAuthEmulator,
   signOut,
 } from "firebase/auth";
 import { User } from "@firebase/auth";
+import { auth } from "../firebase";
 
 interface AuthContextInterface {
   user: User | null;
@@ -37,21 +35,12 @@ const AuthProvider = ({ children }: Props) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 
-  const auth = getAuth();
-
-  useMemo(() => {
-    if (process.env.NODE_ENV !== "production") {
-      connectAuthEmulator(auth, "http://localhost:9099");
-    }
-  }, [auth]);
-
   const logIn = (
     { email, password }: { email: string; password: string },
     onSuccess: VoidFunction
   ) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
         onSuccess();
       })
       .catch((error) => {
@@ -75,9 +64,8 @@ const AuthProvider = ({ children }: Props) => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
       setIsAuthLoading(false);
-      console.log(user);
     });
-  }, [auth]);
+  }, []);
   return (
     <AuthContext.Provider value={{ isAuthLoading, user, logIn, logOut }}>
       {children}
