@@ -5,12 +5,18 @@ import { Button } from "components/atoms/Button/Button";
 import { LoginWrapper } from "./Login.styles";
 import * as yup from "yup";
 import { useAuth } from "providers/AuthProvider";
-
+import { useNavigate, useLocation } from "react-router-dom";
 type Props = {};
 
 interface FormInputs {
   email: string;
   password: string;
+}
+
+interface LocationState {
+  from?: {
+    path: string;
+  };
 }
 
 const schema = yup
@@ -29,10 +35,20 @@ const Login = (props: Props) => {
     formState: { errors },
     handleSubmit,
   } = useForm<FormInputs>({ resolver: yupResolver(schema) });
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const locationState = location.state as LocationState;
+  const from = locationState?.from?.path || "/";
 
   const { user, logIn, logOut } = useAuth();
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => logIn(data);
+  const navigateToPreviousPage = () => {
+    navigate(from, { replace: true });
+  };
+
+  const onSubmit: SubmitHandler<FormInputs> = (data) =>
+    logIn(data, navigateToPreviousPage);
 
   return (
     <>

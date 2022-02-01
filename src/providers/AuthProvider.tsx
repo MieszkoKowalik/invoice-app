@@ -18,7 +18,10 @@ import { User } from "@firebase/auth";
 interface AuthContextInterface {
   user: User | null;
   isAuthLoading: boolean;
-  logIn: (data: { email: string; password: string }) => void;
+  logIn: (
+    data: { email: string; password: string },
+    onSuccess: VoidFunction
+  ) => void;
   logOut: () => void;
 }
 
@@ -42,10 +45,14 @@ const AuthProvider = ({ children }: Props) => {
     }
   }, [auth]);
 
-  const logIn = ({ email, password }: { email: string; password: string }) => {
+  const logIn = (
+    { email, password }: { email: string; password: string },
+    onSuccess: VoidFunction
+  ) => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        onSuccess();
       })
       .catch((error) => {
         const errorCode = error.code;
