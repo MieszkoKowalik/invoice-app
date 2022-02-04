@@ -2,11 +2,12 @@ import { Wrapper } from "./Badge.styles";
 
 export interface BadgeProps {
   variant: "paid" | "pending" | "draft";
+  className?: string;
 }
 
-const Badge = ({ variant }: BadgeProps) => {
+const Badge = ({ variant, className }: BadgeProps) => {
   return (
-    <Wrapper variant={variant}>
+    <Wrapper className={className} variant={variant}>
       <span></span>
       {variant}
     </Wrapper>
