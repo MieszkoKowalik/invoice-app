@@ -8,6 +8,7 @@ declare module "styled-components" {
     mode: Theme;
 
     breakpoints: {
+      s: string;
       m: string;
       l: string;
       xl: string;
