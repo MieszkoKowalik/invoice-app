@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 
-interface Props {
+interface LabelProps {
   error?: string;
 }
 
-export const StyledLabel = styled.label<Props>`
+export const StyledLabel = styled.label<LabelProps>`
   display: flex;
   flex-direction: column;
   gap: 10px;
