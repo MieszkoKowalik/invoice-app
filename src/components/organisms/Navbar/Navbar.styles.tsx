@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 100;
   @media ${({ theme }) => theme.breakpoints.xl} {
     flex-direction: column;
     border-bottom-right-radius: 20px;
