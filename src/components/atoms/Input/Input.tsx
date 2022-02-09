@@ -6,6 +6,7 @@ interface Props {
 
 export const Input = styled.input<Props>`
   padding: 16px 20px;
+  height: 48px;
   width: 100%;
   border-radius: 4px;
   border: 1px solid ${({ theme }) => theme.colors.neutral[300]};
