@@ -65,6 +65,13 @@ const schema = yup
     createdAt: yup.string().required("Can't be empty"),
     paymentDue: yup.object().required("Can't be empty"),
     description: yup.string().required("Can't be empty"),
+    items: yup.array(
+      yup.object({
+        name: yup.string().required(" "),
+        qty: yup.string().required(" "),
+        price: yup.string().required(" "),
+      })
+    ),
   })
   .required();
 
@@ -231,14 +238,14 @@ const InvoiceForm = (props: Props) => {
                 <GridCell area="name">
                   <LabeledInput
                     {...register(`items.${index}.name`)}
-                    error={errors.description?.message}
+                    error={errors.items?.[index]?.name?.message}
                     label="Item Name"
                   />
                 </GridCell>
                 <GridCell area="qty">
                   <LabeledInput
                     {...register(`items.${index}.qty`)}
-                    error={errors.description?.message}
+                    error={errors.items?.[index]?.qty?.message}
                     label="Qty"
                     min="0"
                     type="number"
@@ -247,7 +254,7 @@ const InvoiceForm = (props: Props) => {
                 <GridCell area="price">
                   <LabeledInput
                     {...register(`items.${index}.price`)}
-                    error={errors.description?.message}
+                    error={errors.items?.[index]?.price?.message}
                     label="Price"
                     type="number"
                     min="0"
