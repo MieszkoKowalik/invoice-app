@@ -1,5 +1,6 @@
 import { Button } from "components/atoms/Button/Button";
 import styled from "styled-components";
+import { ErrorSpan } from "components/atoms/ErrorSpan/ErrorSpan";
 
 export const FormWrapper = styled.div`
   padding: 24px 0px 24px 24px;
@@ -116,6 +117,9 @@ export const ItemsFieldset = styled.fieldset`
       grid-template-columns: 1fr 85px 100px 80px auto;
       margin-bottom: 16px;
     }
+  }
+  > ${ErrorSpan} {
+    margin-top: 32px;
   }
 `;
 

@@ -21,7 +21,7 @@ import {
   StyledButton,
 } from "./InvoiceForm.styles";
 import { ReactComponent as DeleteIcon } from "assets/images/icon-delete.svg";
-
+import { ErrorSpan } from "components/atoms/ErrorSpan/ErrorSpan";
 interface FormInputs {
   senderAddress: {
     street: string;
@@ -65,13 +65,15 @@ const schema = yup
     createdAt: yup.string().required("Can't be empty"),
     paymentDue: yup.object().required("Can't be empty"),
     description: yup.string().required("Can't be empty"),
-    items: yup.array(
-      yup.object({
-        name: yup.string().required(" "),
-        qty: yup.string().required(" "),
-        price: yup.string().required(" "),
-      })
-    ),
+    items: yup
+      .array(
+        yup.object({
+          name: yup.string().required(" "),
+          qty: yup.string().required(" "),
+          price: yup.string().required(" "),
+        })
+      )
+      .min(1, "An item must be added"),
   })
   .required();
 
@@ -92,6 +94,7 @@ const InvoiceForm = (props: Props) => {
     handleSubmit,
     control,
     watch,
+    clearErrors,
   } = useForm<FormInputs>({
     resolver: resolver,
   });
@@ -279,12 +282,19 @@ const InvoiceForm = (props: Props) => {
           <Button type="button" variant="secondary" onClick={() => append({})}>
             Add item
           </Button>
+          <ErrorSpan>{(errors.items as any)?.message}</ErrorSpan>
         </ItemsFieldset>
         <Controls>
           <StyledButton type="button" variant="bordered">
             Discard
           </StyledButton>
-          <Button variant="secondary" onClick={() => validateHandler(false)}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              clearErrors("items");
+              validateHandler(false);
+            }}
+          >
             save as draft
           </Button>
           <Button variant="primary" onClick={() => validateHandler(true)}>
