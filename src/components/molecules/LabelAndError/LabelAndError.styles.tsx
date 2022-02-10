@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-
 interface LabelProps {
   error?: string;
 }
@@ -16,10 +15,7 @@ export const StyledLabel = styled.label<LabelProps>`
       color: ${({ theme }) => theme.colors.danger[700]};
     `}
 `;
-export const ErrorSpan = styled.span`
-  font-size: ${({ theme }) => theme.fontSize.xs};
-  font-weight: 600;
-`;
+
 export const LabelWrapper = styled.span`
   display: flex;
   gap: 5px;
