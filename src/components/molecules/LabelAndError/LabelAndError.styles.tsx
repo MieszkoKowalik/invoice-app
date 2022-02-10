@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { ErrorSpan } from "components/atoms/ErrorSpan/ErrorSpan";
 interface LabelProps {
   error?: string;
 }
@@ -21,4 +22,8 @@ export const LabelWrapper = styled.span`
   gap: 5px;
   align-items: baseline;
   justify-content: space-between;
+
+  ${ErrorSpan} {
+    text-align: right;
+  }
 `;
