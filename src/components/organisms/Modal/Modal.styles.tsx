@@ -14,7 +14,6 @@ export const Overlay = styled.div`
 export const ModalWrapper = styled(ReactModal).attrs({
   overlayClassName: "ReactModal__Overlay",
 })`
-  border-radius: 15px;
   &:focus {
     outline: none;
   }
