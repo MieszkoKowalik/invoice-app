@@ -38,7 +38,7 @@ interface FormInputs {
     country: string;
   };
   createdAt: string;
-  paymentDue: number;
+  paymentTerms: number;
   description: string;
   items: { name: string; qty: number; price: number }[];
 }
@@ -63,7 +63,7 @@ const schema = yup
       country: yup.string().required("Can't be empty"),
     }),
     createdAt: yup.string().required("Can't be empty"),
-    paymentDue: yup.object().required("Can't be empty"),
+    paymentTerms: yup.object().required("Can't be empty"),
     description: yup.string().required("Can't be empty"),
     items: yup
       .array(
@@ -77,7 +77,9 @@ const schema = yup
   })
   .required();
 
-interface Props {}
+interface Props {
+  closeModal: VoidFunction;
+}
 
 const options = [
   { value: 1, label: "Net 1 day" },
@@ -86,7 +88,7 @@ const options = [
   { value: 30, label: "Net 30 days" },
 ];
 
-const InvoiceForm = (props: Props) => {
+const InvoiceForm = ({ closeModal }: Props) => {
   const { resolver, validateHandler } = useResolver(schema);
   const {
     register,
@@ -212,7 +214,7 @@ const InvoiceForm = (props: Props) => {
               render={({ field }) => (
                 <CustomSelect
                   {...field}
-                  error={errors.paymentDue?.message}
+                  error={errors.paymentTerms?.message}
                   isSearchable={false}
                   label="Payment Terms"
                   placeholder=""
@@ -220,7 +222,7 @@ const InvoiceForm = (props: Props) => {
                 />
               )}
               control={control}
-              name="paymentDue"
+              name="paymentTerms"
             />
           </GridCell>
 
@@ -285,7 +287,7 @@ const InvoiceForm = (props: Props) => {
           <ErrorSpan>{(errors.items as any)?.message}</ErrorSpan>
         </ItemsFieldset>
         <Controls>
-          <StyledButton type="button" variant="bordered">
+          <StyledButton type="button" variant="bordered" onClick={closeModal}>
             Discard
           </StyledButton>
           <Button
