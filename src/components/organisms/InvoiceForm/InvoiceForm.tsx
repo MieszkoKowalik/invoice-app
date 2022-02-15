@@ -41,6 +41,7 @@ interface FormInputs {
   paymentTerms: number;
   description: string;
   items: { name: string; qty: number; price: number }[];
+  status: string;
 }
 
 const schema = yup
@@ -97,6 +98,7 @@ const InvoiceForm = ({ closeModal }: Props) => {
     control,
     watch,
     clearErrors,
+    setValue,
   } = useForm<FormInputs>({
     resolver: resolver,
   });
@@ -295,11 +297,18 @@ const InvoiceForm = ({ closeModal }: Props) => {
             onClick={() => {
               clearErrors("items");
               validateHandler(false);
+              setValue("status", "draft");
             }}
           >
             save as draft
           </Button>
-          <Button variant="primary" onClick={() => validateHandler(true)}>
+          <Button
+            variant="primary"
+            onClick={() => {
+              validateHandler(true);
+              setValue("status", "pending");
+            }}
+          >
             save & send
           </Button>
         </Controls>
