@@ -160,7 +160,7 @@ export const Controls = styled.div`
   gap: 7px;
   padding: 24px;
 
-  @media${({ theme }) => theme.breakpoints.m} {
+  @media ${({ theme }) => theme.breakpoints.m} {
     padding: 32px 56px;
   }
   @media ${({ theme }) => theme.breakpoints.xl} {
