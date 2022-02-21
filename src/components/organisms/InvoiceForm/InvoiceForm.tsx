@@ -16,13 +16,16 @@ import {
   GridCell,
   ItemsFieldset,
   DeleteButton,
-  Total,
   Controls,
   StyledButton,
 } from "./InvoiceForm.styles";
 import { ReactComponent as DeleteIcon } from "assets/images/icon-delete.svg";
 import { ErrorSpan } from "components/atoms/ErrorSpan/ErrorSpan";
+import { formatDateString } from "helpers/formatDateString";
+import { generateID } from "helpers/generateID";
+import React from "react";
 interface FormInputs {
+  id: string;
   senderAddress: {
     street: string;
     city: string;
@@ -38,10 +41,12 @@ interface FormInputs {
     country: string;
   };
   createdAt: string;
-  paymentTerms: number;
+  paymentDue: string;
+  paymentTerms: { value: number; label: string };
   description: string;
-  items: { name: string; qty: number; price: number }[];
-  status: string;
+  items: { name: string; quantity: number; price: number; total: number }[];
+  status: "paid" | "pending" | "draft";
+  total: number;
 }
 
 const schema = yup
@@ -64,13 +69,17 @@ const schema = yup
       country: yup.string().required("Can't be empty"),
     }),
     createdAt: yup.string().required("Can't be empty"),
-    paymentTerms: yup.object().required("Can't be empty"),
+    paymentTerms: yup
+      .object({
+        value: yup.number().required("Can't be empty"),
+      })
+      .required(),
     description: yup.string().required("Can't be empty"),
     items: yup
       .array(
         yup.object({
           name: yup.string().required(" "),
-          qty: yup.string().required(" "),
+          quantity: yup.string().required(" "),
           price: yup.string().required(" "),
         })
       )
@@ -115,15 +124,32 @@ const InvoiceForm = ({ closeModal }: Props) => {
     };
   });
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) => {
+  const createdAt = watch("createdAt");
+  const paymentTerms = watch("paymentTerms", options[0]);
+
+  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+    data.total = data.items.reduce((prev, current) => prev + +current.total, 0);
     console.log(data);
   };
+
+  React.useEffect(() => {
+    const createdDate = new Date(createdAt);
+
+    const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
+    const paymentTermsInMilliseconds = paymentTerms.value * MILLISECONDS_IN_DAY;
+
+    const paymentDue = formatDateString(
+      createdDate.valueOf() + paymentTermsInMilliseconds
+    );
+    setValue("paymentDue", paymentDue);
+  }, [createdAt, paymentTerms, setValue]);
 
   return (
     <FormWrapper>
       <h2>New Invoice</h2>
 
       <form onSubmit={handleSubmit(onSubmit)}>
+        <input type="hidden" {...register("id")} defaultValue={generateID()} />
         <FromFieldset>
           <legend>Bill from</legend>
           <GridCell area="street">
@@ -216,13 +242,14 @@ const InvoiceForm = ({ closeModal }: Props) => {
               render={({ field }) => (
                 <CustomSelect
                   {...field}
-                  error={errors.paymentTerms?.message}
+                  error={errors.paymentTerms?.value?.message}
                   isSearchable={false}
                   label="Payment Terms"
                   placeholder=""
                   options={options}
                 />
               )}
+              defaultValue={options[0]}
               control={control}
               name="paymentTerms"
             />
@@ -244,35 +271,57 @@ const InvoiceForm = ({ closeModal }: Props) => {
               <li key={item.id}>
                 <GridCell area="name">
                   <LabeledInput
-                    {...register(`items.${index}.name`)}
+                    {...register(`items.${index}.name` as const)}
                     error={errors.items?.[index]?.name?.message}
                     label="Item Name"
                   />
                 </GridCell>
                 <GridCell area="qty">
                   <LabeledInput
-                    {...register(`items.${index}.qty`)}
-                    error={errors.items?.[index]?.qty?.message}
+                    {...register(`items.${index}.quantity` as const, {
+                      valueAsNumber: true,
+                      onChange: (e) =>
+                        setValue(
+                          `items.${index}.total`,
+                          +(e.target.value * item.price || 0).toFixed(2)
+                        ),
+                    })}
+                    error={errors.items?.[index]?.quantity?.message}
                     label="Qty"
                     min="0"
                     type="number"
+                    defaultValue={0}
                   />
                 </GridCell>
                 <GridCell area="price">
                   <LabeledInput
-                    {...register(`items.${index}.price`)}
+                    {...register(`items.${index}.price` as const, {
+                      valueAsNumber: true,
+                      onChange: (e) =>
+                        setValue(
+                          `items.${index}.total`,
+                          +(e.target.value * item.quantity || 0).toFixed(2)
+                        ),
+                    })}
                     error={errors.items?.[index]?.price?.message}
                     label="Price"
                     type="number"
+                    defaultValue={0}
                     min="0"
                     step="0.01"
                   />
                 </GridCell>
+
                 <GridCell area="total">
-                  <Total>
-                    <span>Total</span>
-                    <div>{(item.price * item.qty || 0).toFixed(2)}</div>
-                  </Total>
+                  <LabeledInput
+                    label="Total"
+                    {...register(`items.${index}.total` as const, {
+                      valueAsNumber: true,
+                    })}
+                    readOnly
+                    isTransparent
+                    defaultValue={0}
+                  />
                 </GridCell>
                 <GridCell area="btn">
                   <DeleteButton type="button" onClick={() => remove(index)}>

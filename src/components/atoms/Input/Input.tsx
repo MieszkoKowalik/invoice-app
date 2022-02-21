@@ -2,6 +2,7 @@ import styled, { css } from "styled-components";
 
 interface Props {
   error?: string;
+  isTransparent?: boolean;
 }
 
 export const Input = styled.input<Props>`
@@ -28,5 +29,13 @@ export const Input = styled.input<Props>`
     error &&
     css`
       border-color: ${({ theme }) => theme.colors.danger[500]};
+    `}
+
+  ${({ isTransparent }) =>
+    isTransparent &&
+    css`
+      padding: 0;
+      border: none;
+      background-color: transparent;
     `}
 `;

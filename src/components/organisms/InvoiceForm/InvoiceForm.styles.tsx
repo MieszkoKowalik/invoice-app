@@ -136,20 +136,6 @@ export const DeleteButton = styled.button`
   }
 `;
 
-export const Total = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: ${({ theme }) => theme.colors.neutral[600]};
-  font-size: ${({ theme }) => theme.fontSize.s};
-
-  div {
-    font-weight: 700;
-    height: 48px;
-    line-height: 48px;
-  }
-`;
-
 export const Controls = styled.div`
   position: absolute;
   right: 0;

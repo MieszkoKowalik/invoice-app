@@ -4,6 +4,7 @@ import LabelAndError from "../LabelAndError/LabelAndError";
 interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error?: string;
+  isTransparent?: boolean;
 }
 
 const LabeledInput = React.forwardRef<HTMLInputElement, Props>(
