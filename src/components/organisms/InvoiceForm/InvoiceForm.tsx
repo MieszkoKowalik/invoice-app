@@ -6,7 +6,6 @@ import {
 } from "react-hook-form";
 import * as yup from "yup";
 import LabeledInput from "components/molecules/LabeledInput/LabeledInput";
-import useResolver from "hooks/useResolver";
 import { Button } from "components/atoms/Button/Button";
 import CustomSelect from "components/molecules/CustomSelect/CustomSelect";
 import {
@@ -23,7 +22,8 @@ import { ReactComponent as DeleteIcon } from "assets/images/icon-delete.svg";
 import { ErrorSpan } from "components/atoms/ErrorSpan/ErrorSpan";
 import { formatDateString } from "helpers/formatDateString";
 import { generateID } from "helpers/generateID";
-import React from "react";
+import { useEffect } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
 interface FormInputs {
   id: string;
   senderAddress: {
@@ -47,43 +47,72 @@ interface FormInputs {
   items: { name: string; quantity: number; price: number; total: number }[];
   status: "paid" | "pending" | "draft";
   total: number;
+  shouldValidate: boolean;
 }
 
 const schema = yup
   .object({
-    senderAddress: yup.object({
-      street: yup.string().required("Can't be empty"),
-      city: yup.string().required("Can't be empty"),
-      postCode: yup.string().required("Can't be empty"),
-      country: yup.string().required("Can't be empty"),
+    shouldValidate: yup.boolean(),
+    senderAddress: yup.object().when("shouldValidate", {
+      is: true,
+      then: (schema) =>
+        schema.shape({
+          street: yup.string().required("Can't be empty"),
+          city: yup.string().required("Can't be empty"),
+          postCode: yup.string().required("Can't be empty"),
+          country: yup.string().required("Can't be empty"),
+        }),
     }),
-    clientName: yup.string().required("Can't be empty"),
-    clientEmail: yup
-      .string()
-      .email("Must be a valid email")
-      .required("Can't be empty"),
-    clientAddress: yup.object({
-      street: yup.string().required("Can't be empty"),
-      city: yup.string().required("Can't be empty"),
-      postCode: yup.string().required("Can't be empty"),
-      country: yup.string().required("Can't be empty"),
+    clientName: yup.string().when("shouldValidate", {
+      is: true,
+      then: (schema) => schema.required("Can't be empty"),
     }),
-    createdAt: yup.string().required("Can't be empty"),
+    clientEmail: yup.string().when("shouldValidate", {
+      is: true,
+      then: (schema) =>
+        schema.email("Must be a valid email").required("Can't be empty"),
+    }),
+
+    clientAddress: yup.object().when("shouldValidate", {
+      is: true,
+      then: (schema) =>
+        schema.shape({
+          street: yup.string().required("Can't be empty"),
+          city: yup.string().required("Can't be empty"),
+          postCode: yup.string().required("Can't be empty"),
+          country: yup.string().required("Can't be empty"),
+        }),
+    }),
+    createdAt: yup.string().when("shouldValidate", {
+      is: true,
+      then: (schema) => schema.required("Can't be empty"),
+    }),
+
     paymentTerms: yup
       .object({
-        value: yup.number().required("Can't be empty"),
+        value: yup.number().when("shouldValidate", {
+          is: true,
+          then: (schema) => schema.required("Can't be empty"),
+        }),
       })
       .required(),
-    description: yup.string().required("Can't be empty"),
-    items: yup
-      .array(
-        yup.object({
-          name: yup.string().required(" "),
-          quantity: yup.string().required(" "),
-          price: yup.string().required(" "),
-        })
-      )
-      .min(1, "An item must be added"),
+    description: yup.string().when("shouldValidate", {
+      is: true,
+      then: (schema) => schema.required("Can't be empty"),
+    }),
+    items: yup.array().when("shouldValidate", {
+      is: true,
+      then: (schema) =>
+        schema
+          .of(
+            yup.object({
+              name: yup.string().required(" "),
+              quantity: yup.number().required(" "),
+              price: yup.number().required(" "),
+            })
+          )
+          .min(1, "An item must be added"),
+    }),
   })
   .required();
 
@@ -99,7 +128,6 @@ const options = [
 ];
 
 const InvoiceForm = ({ closeModal }: Props) => {
-  const { resolver, validateHandler } = useResolver(schema);
   const {
     register,
     formState: { errors },
@@ -109,7 +137,7 @@ const InvoiceForm = ({ closeModal }: Props) => {
     clearErrors,
     setValue,
   } = useForm<FormInputs>({
-    resolver: resolver,
+    resolver: yupResolver(schema),
   });
 
   const { fields, append, remove } = useFieldArray({
@@ -127,21 +155,21 @@ const InvoiceForm = ({ closeModal }: Props) => {
   const createdAt = watch("createdAt");
   const paymentTerms = watch("paymentTerms", options[0]);
 
-  const onSubmit: SubmitHandler<FormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<FormInputs> = (data) => {
     data.total = data.items.reduce((prev, current) => prev + +current.total, 0);
-    console.log(data);
+    const { shouldValidate, ...dataToSend } = data;
+    console.log(dataToSend);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     const createdDate = new Date(createdAt);
-
     const MILLISECONDS_IN_DAY = 24 * 60 * 60 * 1000;
     const paymentTermsInMilliseconds = paymentTerms.value * MILLISECONDS_IN_DAY;
 
     const paymentDue = formatDateString(
       createdDate.valueOf() + paymentTermsInMilliseconds
     );
-    setValue("paymentDue", paymentDue);
+    setValue("paymentDue", paymentDue === "Invalid Date" ? "" : paymentDue);
   }, [createdAt, paymentTerms, setValue]);
 
   return (
@@ -345,8 +373,8 @@ const InvoiceForm = ({ closeModal }: Props) => {
             variant="secondary"
             onClick={() => {
               clearErrors("items");
-              validateHandler(false);
               setValue("status", "draft");
+              setValue("shouldValidate", false);
             }}
           >
             save as draft
@@ -354,7 +382,7 @@ const InvoiceForm = ({ closeModal }: Props) => {
           <Button
             variant="primary"
             onClick={() => {
-              validateHandler(true);
+              setValue("shouldValidate", true);
               setValue("status", "pending");
             }}
           >
