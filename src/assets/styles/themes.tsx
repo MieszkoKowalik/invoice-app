@@ -8,6 +8,7 @@ const theme = {
     xl: "(min-width:1200px)",
   },
   fontSize: {
+    xxs: "0.625rem",
     xs: "0.6875rem",
     s: "0.75rem",
     m: "1rem",
