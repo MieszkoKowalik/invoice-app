@@ -1,15 +1,12 @@
 import { FC, ReactElement } from "react";
 import { render, RenderOptions } from "@testing-library/react";
 import ThemesProvider from "providers/ThemesProvider";
-import AuthProvider from "providers/AuthProvider";
 import { BrowserRouter } from "react-router-dom";
 
 const AllTheProviders: FC = ({ children }) => {
   return (
     <BrowserRouter>
-      <ThemesProvider>
-        <AuthProvider>{children}</AuthProvider>
-      </ThemesProvider>
+      <ThemesProvider>{children}</ThemesProvider>
     </BrowserRouter>
   );
 };
