@@ -3,7 +3,7 @@ export interface Invoice {
   createdAt: string;
   paymentDue: string;
   description: string;
-  paymentTerms: number;
+  paymentTerms: { value: number; label: string };
   clientName: string;
   clientEmail: string;
   status: "paid" | "pending" | "draft";
