@@ -43,7 +43,7 @@ const Login = (props: Props) => {
   const locationState = location.state as LocationState;
   const from = locationState?.from?.path || "/";
 
-  const { user, logIn, logOut } = useAuth();
+  const { logIn } = useAuth();
 
   const navigateToPreviousPage = () => {
     navigate(from, { replace: true });
