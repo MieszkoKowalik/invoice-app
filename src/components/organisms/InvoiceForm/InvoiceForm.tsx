@@ -24,6 +24,7 @@ import { formatDateString } from "helpers/formatDateString";
 import { generateID } from "helpers/generateID";
 import { useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Invoice } from "types";
 interface FormInputs {
   id: string;
   senderAddress: {
@@ -117,7 +118,8 @@ const schema = yup
   .required();
 
 interface Props {
-  closeModal: VoidFunction;
+  onDiscard: VoidFunction;
+  onSubmit: (data: Invoice) => void;
 }
 
 const options = [
@@ -127,7 +129,7 @@ const options = [
   { value: 30, label: "Net 30 days" },
 ];
 
-const InvoiceForm = ({ closeModal }: Props) => {
+const InvoiceForm = ({ onDiscard, onSubmit: onSubmition }: Props) => {
   const {
     register,
     formState: { errors },
@@ -158,7 +160,7 @@ const InvoiceForm = ({ closeModal }: Props) => {
   const onSubmit: SubmitHandler<FormInputs> = (data) => {
     data.total = data.items.reduce((prev, current) => prev + +current.total, 0);
     const { shouldValidate, ...dataToSend } = data;
-    console.log(dataToSend);
+    onSubmition(dataToSend);
   };
 
   useEffect(() => {
@@ -366,7 +368,7 @@ const InvoiceForm = ({ closeModal }: Props) => {
           <ErrorSpan>{(errors.items as any)?.message}</ErrorSpan>
         </ItemsFieldset>
         <Controls>
-          <StyledButton type="button" variant="bordered" onClick={closeModal}>
+          <StyledButton type="button" variant="bordered" onClick={onDiscard}>
             Discard
           </StyledButton>
           <Button
