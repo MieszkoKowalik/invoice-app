@@ -11,6 +11,7 @@ import {
   StyledBadge,
 } from "./InvoiceCard.styles";
 import { formatNumberToGBP } from "helpers/formatNumberToGBP";
+import { formatDateString } from "helpers/formatDateString";
 
 type Props = {
   invoice: Invoice;
@@ -23,7 +24,7 @@ const InvoiceCard = ({ invoice }: Props) => {
   return (
     <Wrapper>
       <IdSpan>{invoice.id}</IdSpan>
-      <DateSpan> Due {invoice.paymentDue}</DateSpan>
+      <DateSpan> Due {formatDateString(invoice.paymentDue)}</DateSpan>
       <ClientSpan>{invoice.clientName}</ClientSpan>
       <AmountSpan>{formatNumberToGBP(invoice.total)}</AmountSpan>
       <StyledBadge variant={invoice.status} />
