@@ -8,18 +8,19 @@ import { useAuth } from "providers/AuthProvider";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Alert } from "components/molecules/Alert/Alert";
-type Props = {};
 
-interface FormInputs {
+type LoginProps = {};
+
+type FormInputs = {
   email: string;
   password: string;
-}
+};
 
-interface LocationState {
+type LocationState = {
   from?: {
     path: string;
   };
-}
+};
 
 const schema = yup
   .object({
@@ -31,15 +32,15 @@ const schema = yup
   })
   .required();
 
-const Login = (props: Props) => {
+const Login = (props: LoginProps) => {
   const {
     register,
     formState: { errors },
     handleSubmit,
   } = useForm<FormInputs>({ resolver: yupResolver(schema) });
+
   const navigate = useNavigate();
   const location = useLocation();
-
   const locationState = location.state as LocationState;
   const from = locationState?.from?.path || "/";
 

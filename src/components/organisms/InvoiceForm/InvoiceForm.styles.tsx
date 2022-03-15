@@ -6,9 +6,11 @@ export const FormWrapper = styled.div`
   padding: 24px 0px 24px 24px;
   color: ${({ theme }) => theme.colors.neutral[900]};
   height: 100%;
+
   @media ${({ theme }) => theme.breakpoints.m} {
     padding: 56px 32px 56px 56px;
   }
+
   h2 {
     margin-bottom: 24px;
     font-size: ${({ theme }) => theme.fontSize.l};
@@ -26,9 +28,11 @@ export const FormWrapper = styled.div`
     &::-webkit-scrollbar-track {
       background: transparent;
     }
+
     &::-webkit-scrollbar {
       width: 8px;
     }
+
     &::-webkit-scrollbar-thumb {
       background-color: ${({ theme }) => theme.colors.neutral[300]};
       border-radius: 4px;
@@ -45,6 +49,7 @@ export const StyledFieldset = styled.fieldset`
   @media ${({ theme }) => theme.breakpoints.m} {
     grid-template-columns: repeat(6, 1fr);
   }
+
   legend {
     margin-bottom: 24px;
     font-size: ${({ theme }) => theme.fontSize.s};
@@ -58,6 +63,7 @@ export const FromFieldset = styled(StyledFieldset)`
     "street street "
     "city  post"
     "country country";
+
   @media ${({ theme }) => theme.breakpoints.m} {
     grid-template-areas:
       "street street street street street street"
@@ -74,6 +80,7 @@ export const ToFieldset = styled(StyledFieldset)`
     "invoice invoice"
     "payment payment"
     "project project";
+
   @media ${({ theme }) => theme.breakpoints.m} {
     grid-template-areas:
       "name name name name name name"
@@ -85,17 +92,19 @@ export const ToFieldset = styled(StyledFieldset)`
   }
 `;
 
-interface GridCellProps {
+type GridCellProps = {
   area: string;
-}
+};
 
 export const GridCell = styled.div<GridCellProps>`
   grid-area: ${({ area }) => area};
 `;
+
 export const ItemsFieldset = styled.fieldset`
   display: flex;
   flex-direction: column;
   border: none;
+
   legend {
     margin-bottom: 24px;
     color: ${({ theme }) => theme.colors.neutral[600]};
@@ -112,12 +121,14 @@ export const ItemsFieldset = styled.fieldset`
     grid-template-columns: minmax(60px, 1fr) minmax(80px, 1fr) 1fr auto;
     align-items: end;
     gap: 24px 16px;
+
     @media ${({ theme }) => theme.breakpoints.m} {
       grid-template-areas: "name qty price total btn";
       grid-template-columns: 1fr 85px 100px 80px auto;
       margin-bottom: 16px;
     }
   }
+
   > ${ErrorSpan} {
     margin-top: 32px;
   }
@@ -131,6 +142,7 @@ export const DeleteButton = styled.button`
   display: flex;
   align-items: center;
   fill: ${({ theme }) => theme.colors.neutral[400]};
+
   &:hover {
     fill: ${({ theme }) => theme.colors.danger[500]};
   }
@@ -149,6 +161,7 @@ export const Controls = styled.div`
   @media ${({ theme }) => theme.breakpoints.m} {
     padding: 32px 56px;
   }
+
   @media ${({ theme }) => theme.breakpoints.xl} {
     left: 103px;
   } ;

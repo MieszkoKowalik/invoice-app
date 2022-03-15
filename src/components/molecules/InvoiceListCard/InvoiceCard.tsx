@@ -13,11 +13,11 @@ import {
 import { formatNumberToGBP } from "helpers/formatNumberToGBP";
 import { formatDateString } from "helpers/formatDateString";
 
-type Props = {
+type InvoiceCardProps = {
   invoice: Invoice;
 };
 
-const InvoiceCard = ({ invoice }: Props) => {
+const InvoiceCard = ({ invoice }: InvoiceCardProps) => {
   const theme = useTheme();
   const matchesBreakpointM = useMediaQuery(theme.breakpoints.m);
 

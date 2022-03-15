@@ -21,12 +21,14 @@ export const Wrapper = styled.div`
     font-size: ${({ theme }) => theme.fontSize.l};
     color: ${({ theme }) => theme.colors.neutral[900]};
   }
+
   p {
     align-self: start;
     font-size: ${({ theme }) => theme.fontSize.s};
     letter-spacing: -0.25px;
     color: ${({ theme }) => theme.colors.neutral[600]};
   }
+
   span {
     font-weight: bold;
   }

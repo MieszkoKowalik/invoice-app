@@ -2,6 +2,7 @@ import React from "react";
 import { Props } from "react-select";
 import LabelAndError from "../LabelAndError/LabelAndError";
 import { StyledSelect } from "./CustomSelect.styles";
+
 type SelectProps = Props & {
   label: string;
   error?: string;

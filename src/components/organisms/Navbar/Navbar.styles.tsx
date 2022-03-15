@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   z-index: 100;
+
   @media ${({ theme }) => theme.breakpoints.xl} {
     flex-direction: column;
     border-bottom-right-radius: 20px;
@@ -21,6 +22,7 @@ export const UserWrapper = styled.div`
   padding: 0 32px;
   height: 100%;
   border-left: 1px solid ${({ theme }) => theme.colors.neutral[400]};
+
   @media ${({ theme }) => theme.breakpoints.xl} {
     height: unset;
     border: unset;
@@ -29,17 +31,20 @@ export const UserWrapper = styled.div`
     border-top: 1px solid ${({ theme }) => theme.colors.neutral[400]};
   } ;
 `;
+
 export const Panel = styled.div`
   display: flex;
   height: 100%;
   align-items: center;
   gap: 23px;
+
   @media ${({ theme }) => theme.breakpoints.xl} {
     height: unset;
     width: 100%;
     flex-direction: column;
   } ;
 `;
+
 export const LogoWrapper = styled.div`
   position: relative;
   overflow: hidden;
@@ -65,6 +70,7 @@ export const LogoWrapper = styled.div`
     border-top-left-radius: 20px;
     background-color: ${darkTheme.colors.primary[700]};
   }
+
   svg {
     width: 28px;
     height: 26px;

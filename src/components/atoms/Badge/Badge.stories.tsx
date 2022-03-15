@@ -12,10 +12,12 @@ export const Draft = Template.bind({});
 Draft.args = {
   variant: "draft",
 };
+
 export const paid = Template.bind({});
 paid.args = {
   variant: "paid",
 };
+
 export const panding = Template.bind({});
 panding.args = {
   variant: "pending",

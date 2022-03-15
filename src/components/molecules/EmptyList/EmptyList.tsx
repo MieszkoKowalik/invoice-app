@@ -1,8 +1,9 @@
 import { ReactComponent as IllustrationEmpty } from "assets/images/illustration-empty.svg";
 import { Wrapper } from "./EmptyList.styles";
-type Props = {};
 
-const EmptyList = (props: Props) => {
+type EmptyListProps = {};
+
+const EmptyList = (props: EmptyListProps) => {
   return (
     <Wrapper>
       <IllustrationEmpty />

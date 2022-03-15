@@ -18,11 +18,13 @@ describe("Login view", () => {
     expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
     expect(screen.getByText(/log in/i)).toBeInTheDocument();
   });
+
   it("Displays errors if login inputs are empty", async () => {
     renderWithAuthProvider(<Login />);
     userEvent.click(screen.getByText(/log in/i));
     expect(await screen.findAllByText(/can't be empty/i)).toHaveLength(2);
   });
+
   it("Displays error if email is not valid", async () => {
     renderWithAuthProvider(<Login />);
     userEvent.type(screen.getByLabelText(/email/i), "test");
@@ -31,6 +33,7 @@ describe("Login view", () => {
       await screen.findByText(/Please enter valid email/i)
     ).toBeInTheDocument();
   });
+
   it("Signs in user if entered valid email and password", async () => {
     renderWithAuthProvider(<Login />);
     userEvent.type(screen.getByLabelText(/email/i), "test123@test123.com");
@@ -53,6 +56,7 @@ describe("Login view", () => {
       )
     ).toBeInTheDocument();
   });
+
   it("Displays error when wrong password is provided", async () => {
     renderWithAuthProvider(<Login />);
     userEvent.type(screen.getByLabelText(/email/i), "test123@test123.com");

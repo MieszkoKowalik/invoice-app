@@ -15,14 +15,17 @@ export const Primary = Template.bind({});
 Primary.args = {
   variant: "primary",
 };
+
 export const Secondary = Template.bind({});
 Secondary.args = {
   variant: "secondary",
 };
+
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",
 };
+
 export const Bordered = Template.bind({});
 Bordered.args = {
   variant: "bordered",

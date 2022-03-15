@@ -3,7 +3,7 @@ import { lightTheme, darkTheme } from "assets/styles/themes";
 import { createContext, ReactNode, useEffect, useState } from "react";
 import GlobalStyle from "assets/styles/globalStyles";
 
-type Props = {
+type ThemeProvidreProps = {
   children?: ReactNode;
 };
 
@@ -16,7 +16,7 @@ export const ThemesContext = createContext<ThemesContextInterface>(
   {} as ThemesContextInterface
 );
 
-const ThemesProvider = ({ children }: Props) => {
+const ThemesProvider = ({ children }: ThemeProvidreProps) => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const toggleTheme = () => {

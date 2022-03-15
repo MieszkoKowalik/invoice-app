@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
-interface Props {
+type ButtonProps = {
   children: string;
   variant: "primary" | "secondary" | "danger" | "bordered";
-}
+};
 
-export const Button = styled.button<Props>`
+export const Button = styled.button<ButtonProps>`
   padding: 16px 24px;
   border-radius: 999px;
   font-size: ${({ theme }) => theme.fontSize.s};
@@ -21,38 +21,45 @@ export const Button = styled.button<Props>`
         return css`
           color: white;
           background-color: ${({ theme }) => theme.colors.primary[500]};
+
           &:hover,
           &:focus-visible {
             outline: none;
             background-color: ${({ theme }) => theme.colors.primary[300]};
           }
         `;
+
       case "secondary":
         return css`
           color: ${({ theme }) => theme.colors.neutral[600]};
           background-color: ${({ theme }) => theme.colors.neutral[200]};
+
           &:hover,
           &:focus-visible {
             outline: none;
             background-color: ${({ theme }) => theme.colors.neutral[300]};
           }
         `;
+
       case "danger":
         return css`
           color: white;
           background-color: ${({ theme }) => theme.colors.danger[500]};
+
           &:hover,
           &:focus-visible {
             outline: none;
             background-color: ${({ theme }) => theme.colors.danger[300]};
           }
         `;
+
       case "bordered":
         return css`
           color: ${({ theme }) => theme.colors.neutral[500]};
           box-shadow: inset 0 0 0 1px
             ${({ theme }) => theme.colors.neutral[300]};
           background-color: transparent;
+
           &:hover,
           &:focus-visible {
             outline: none;

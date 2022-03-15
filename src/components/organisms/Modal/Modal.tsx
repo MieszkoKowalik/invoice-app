@@ -1,14 +1,15 @@
 import React, { ReactNode } from "react";
 import { ModalWrapper, Overlay } from "./Modal.styles";
-interface Props {
+
+type ModalProps = {
   isOpen: boolean;
   children: ReactNode;
   className?: string;
   closeModal: () => void;
-}
+};
 
-const Modal = React.forwardRef<ReactModal, Props>(
-  ({ isOpen, closeModal, className, children }: Props, ref) => {
+const Modal = React.forwardRef<ReactModal, ModalProps>(
+  ({ isOpen, closeModal, className, children }: ModalProps, ref) => {
     return (
       <ModalWrapper
         className={className}

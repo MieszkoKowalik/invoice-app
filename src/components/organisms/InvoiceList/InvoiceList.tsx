@@ -3,11 +3,11 @@ import InvoiceCard from "components/molecules/InvoiceListCard/InvoiceCard";
 import { StyledUl } from "./InvoiceList.styles";
 import EmptyList from "components/molecules/EmptyList/EmptyList";
 
-type Props = {
+type InvoiceListProps = {
   invoices: Invoice[];
 };
 
-const InvoiceList = ({ invoices }: Props) => {
+const InvoiceList = ({ invoices }: InvoiceListProps) => {
   return (
     <>
       {invoices.length ? (

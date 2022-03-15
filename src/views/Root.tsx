@@ -6,7 +6,7 @@ import Dashboard from "./Dashboard/Dashboard";
 import Login from "./Login/Login";
 import RequireAuth from "helpers/RequireAuth";
 
-function Root() {
+const Root = () => {
   return (
     <BrowserRouter>
       <ThemesProvider>
@@ -28,6 +28,6 @@ function Root() {
       </ThemesProvider>
     </BrowserRouter>
   );
-}
+};
 
 export default Root;

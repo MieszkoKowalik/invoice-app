@@ -1,9 +1,9 @@
 import { Wrapper } from "./Badge.styles";
 
-export interface BadgeProps {
+export type BadgeProps = {
   variant: "paid" | "pending" | "draft";
   className?: string;
-}
+};
 
 const Badge = ({ variant, className }: BadgeProps) => {
   return (

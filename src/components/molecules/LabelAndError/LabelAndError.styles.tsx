@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 import { ErrorSpan } from "components/atoms/ErrorSpan/ErrorSpan";
-interface LabelProps {
+
+type LabelProps = {
   error?: string;
-}
+};
 
 export const StyledLabel = styled.label<LabelProps>`
   display: flex;
@@ -10,6 +11,7 @@ export const StyledLabel = styled.label<LabelProps>`
   gap: 10px;
   font-size: ${({ theme }) => theme.fontSize.s};
   color: ${({ theme }) => theme.colors.neutral[600]};
+
   ${({ error }) =>
     error &&
     css`

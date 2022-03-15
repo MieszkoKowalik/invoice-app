@@ -4,9 +4,10 @@ import { Wrapper, LogoWrapper, UserWrapper, Panel } from "./Navbar.styles";
 import UserImage from "components/molecules/UserImage/UserImage";
 import ThemeToggler from "components/molecules/ThemeToggler/ThemeToggler";
 import { useAuth } from "providers/AuthProvider";
-type Props = {};
 
-const Navbar = (props: Props) => {
+type NavbarProps = {};
+
+const Navbar = (props: NavbarProps) => {
   const { user, logOut } = useAuth();
 
   return (

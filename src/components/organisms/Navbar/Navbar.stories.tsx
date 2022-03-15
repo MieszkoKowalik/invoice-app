@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
 import Navbar from "./Navbar";
 import { Grid } from "components/templates/MainTemplate/MainTemplate.styles";
 

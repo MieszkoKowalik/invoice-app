@@ -1,11 +1,11 @@
 import { ReactNode } from "react";
 import styled, { css } from "styled-components";
 
-interface AlertProps {
+type AlertProps = {
   variant: "success" | "warning" | "danger";
   isBold?: boolean;
   children?: ReactNode;
-}
+};
 
 export const Alert = styled.div<AlertProps>`
   padding: 15px 40px;
@@ -15,6 +15,7 @@ export const Alert = styled.div<AlertProps>`
   background-color: ${({ theme, variant }) => theme.colors[variant][100]};
   color: ${({ theme, variant }) => theme.colors[variant][900]};
   font-size: ${({ theme }) => theme.fontSize.s};
+
   ${({ isBold }) =>
     isBold &&
     css`

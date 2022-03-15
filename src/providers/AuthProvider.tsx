@@ -29,11 +29,11 @@ const AuthContext = createContext<AuthContextInterface>(
   {} as AuthContextInterface
 );
 
-type Props = {
+type AuthProviderProps = {
   children: ReactNode;
 };
 
-const AuthProvider = ({ children }: Props) => {
+const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 

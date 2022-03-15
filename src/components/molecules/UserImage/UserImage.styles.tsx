@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 export const Wrapper = styled.div`
   aspect-ratio: 1;
   width: 32px;
@@ -12,10 +13,12 @@ export const Wrapper = styled.div`
   @media ${({ theme }) => theme.breakpoints.xl} {
     width: 40px;
   }
+
   svg {
     height: 70%;
     fill: ${({ theme }) => theme.colors.neutral[600]};
   }
+
   img {
     width: 100%;
     height: 100%;

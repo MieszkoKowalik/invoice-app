@@ -1,9 +1,9 @@
 import styled, { css } from "styled-components";
 
-interface Props {
+type Props = {
   error?: string;
   isTransparent?: boolean;
-}
+};
 
 export const Input = styled.input<Props>`
   padding: 16px 20px;
@@ -16,6 +16,7 @@ export const Input = styled.input<Props>`
   font-size: ${({ theme }) => theme.fontSize.s};
   font-weight: 700;
   caret-color: ${({ theme }) => theme.colors.primary[500]};
+
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.colors.primary[500]};
@@ -25,6 +26,7 @@ export const Input = styled.input<Props>`
     color: ${({ theme }) => theme.colors.neutral[900]};
     opacity: 0.6;
   }
+
   ${({ error }) =>
     error &&
     css`

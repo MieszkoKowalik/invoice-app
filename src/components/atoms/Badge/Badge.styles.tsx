@@ -23,6 +23,7 @@ export const Wrapper = styled.div<BadgeProps>`
             background-color: ${({ theme }) => theme.colors.neutral[600]};
           }
         `;
+
       case "paid":
         return css`
           background-color: ${({ theme }) => theme.colors.success[100]};
@@ -31,6 +32,7 @@ export const Wrapper = styled.div<BadgeProps>`
             background-color: ${({ theme }) => theme.colors.success[900]};
           }
         `;
+
       case "pending":
         return css`
           background-color: ${({ theme }) => theme.colors.warning[100]};
@@ -41,6 +43,7 @@ export const Wrapper = styled.div<BadgeProps>`
         `;
     }
   }}
+
   span {
     border-radius: 50%;
     width: 8px;

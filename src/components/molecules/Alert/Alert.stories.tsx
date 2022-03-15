@@ -19,6 +19,7 @@ Warning.args = {
   variant: "warning",
   children: "This is a warning alert",
 };
+
 export const Danger = Template.bind({});
 Danger.args = {
   variant: "danger",

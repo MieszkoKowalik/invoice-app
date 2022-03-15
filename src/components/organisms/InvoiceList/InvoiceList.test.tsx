@@ -8,6 +8,7 @@ describe("InvoiceList component", () => {
     expect(screen.getByText(/RT3080/i)).toBeInTheDocument();
     expect(screen.getByText(/XM9141/i)).toBeInTheDocument();
   });
+
   it("Renders empty list message when empty array provided", () => {
     render(<InvoiceList invoices={[]} />);
     expect(screen.getByText("There is nothing here")).toBeInTheDocument();

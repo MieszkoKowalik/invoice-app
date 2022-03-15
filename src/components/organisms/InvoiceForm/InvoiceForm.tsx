@@ -25,31 +25,10 @@ import { generateID } from "helpers/generateID";
 import { useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Invoice } from "types";
-interface FormInputs {
-  id: string;
-  senderAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  clientName: string;
-  clientEmail: string;
-  clientAddress: {
-    street: string;
-    city: string;
-    postCode: string;
-    country: string;
-  };
-  createdAt: string;
-  paymentDue: string;
-  paymentTerms: { value: number; label: string };
-  description: string;
-  items: { name: string; quantity: number; price: number; total: number }[];
-  status: "paid" | "pending" | "draft";
-  total: number;
+
+type FormInputs = Invoice & {
   shouldValidate: boolean;
-}
+};
 
 const schema = yup
   .object({
@@ -117,10 +96,10 @@ const schema = yup
   })
   .required();
 
-interface Props {
+type InvoiceFormProps = {
   onDiscard: VoidFunction;
   onSubmit: (data: Invoice) => void;
-}
+};
 
 const options = [
   { value: 1, label: "Net 1 day" },
@@ -129,7 +108,10 @@ const options = [
   { value: 30, label: "Net 30 days" },
 ];
 
-const InvoiceForm = ({ onDiscard, onSubmit: onSubmition }: Props) => {
+const InvoiceForm = ({
+  onDiscard,
+  onSubmit: onSubmition,
+}: InvoiceFormProps) => {
   const {
     register,
     formState: { errors },

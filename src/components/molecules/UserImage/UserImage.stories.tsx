@@ -1,5 +1,4 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-
 import UserImage from "./UserImage";
 import UserAvatar from "assets/images/image-avatar.jpg";
 
@@ -13,6 +12,7 @@ const Template: ComponentStory<typeof UserImage> = (args) => (
 );
 
 export const Default = Template.bind({});
+
 export const WithImage = Template.bind({});
 WithImage.args = {
   source: UserAvatar,
