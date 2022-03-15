@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
 import { Button } from "components/atoms/Button/Button";
 import InvoiceForm from "components/organisms/InvoiceForm/InvoiceForm";
-import { InvoiceModal } from "./Dashboard.styles";
+import { DashboardWrapper, InvoiceModal, Topbar } from "./Dashboard.styles";
 import { Invoice } from "types";
 import { db } from "../../firebase";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
-interface Props {}
-const Dashboard = (props: Props) => {
+import InvoiceList from "components/organisms/InvoiceList/InvoiceList";
+
+type DashboardProps = {};
+
+const Dashboard = (props: DashboardProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const closeModal = () => {
@@ -46,15 +49,20 @@ const Dashboard = (props: Props) => {
   }, []);
 
   return (
-    <div>
-      <h1>Invoices</h1>
-      <Button onClick={openModal} variant="primary">
-        New Invoice
-      </Button>
+    <DashboardWrapper>
+      <Topbar>
+        <h1>Invoices</h1>
+        <Button onClick={openModal} variant="primary">
+          New Invoice
+        </Button>
+      </Topbar>
+
       <InvoiceModal isOpen={modalIsOpen} closeModal={closeModal}>
         <InvoiceForm onSubmit={onSubmit} onDiscard={closeModal} />
       </InvoiceModal>
-    </div>
+
+      <InvoiceList invoices={invoices} />
+    </DashboardWrapper>
   );
 };
 
