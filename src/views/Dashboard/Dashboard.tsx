@@ -1,7 +1,11 @@
 import { useState, useEffect } from "react";
-import { Button } from "components/atoms/Button/Button";
 import InvoiceForm from "components/organisms/InvoiceForm/InvoiceForm";
-import { DashboardWrapper, InvoiceModal, Topbar } from "./Dashboard.styles";
+import {
+  DashboardWrapper,
+  InvoiceModal,
+  Topbar,
+  NewInvoiceButton,
+} from "./Dashboard.styles";
 import { Invoice } from "types";
 import { db } from "../../firebase";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
@@ -64,9 +68,9 @@ const Dashboard = (props: DashboardProps) => {
           <Text>{getInvoiceLenghtMessage(invoices.length, isTablet)}</Text>
         </div>
 
-        <Button onClick={openModal} variant="primary">
+        <NewInvoiceButton onClick={openModal} variant="primary">
           New{isTablet && "  Invoice"}
-        </Button>
+        </NewInvoiceButton>
       </Topbar>
 
       <InvoiceModal isOpen={modalIsOpen} closeModal={closeModal}>

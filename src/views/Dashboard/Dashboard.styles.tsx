@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import Modal from "components/organisms/Modal/Modal";
+import { Button } from "components/atoms/Button/Button";
+import PlusIcon from "assets/images/icon-plus.svg";
 
 export const InvoiceModal = styled(Modal)`
   position: fixed;
@@ -47,4 +49,28 @@ export const Topbar = styled.div`
     margin-top: 65px;
     margin-bottom: 65px;
   } ;
+`;
+
+export const NewInvoiceButton = styled(Button)`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  padding-right: 14px;
+  @media ${({ theme }) => theme.breakpoints.m} {
+    gap: 16px;
+    padding: 8px;
+    padding-right: 15px;
+  }
+
+  &::before {
+    content: ${() => `url(${PlusIcon})`};
+    width: 32px;
+    height: 32px;
+    background-color: #fff;
+    display: grid;
+    place-items: center;
+    font-size: 0;
+    border-radius: 50%;
+  }
 `;
