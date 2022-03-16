@@ -1,4 +1,6 @@
+import { typography } from "assets/styles/typography";
 import styled from "styled-components";
+import { Text } from "components/atoms/Text/Text";
 
 export const Wrapper = styled.div`
   max-width: 220px;
@@ -17,16 +19,12 @@ export const Wrapper = styled.div`
 
   h2 {
     margin-bottom: 24px;
-    letter-spacing: -0.63px;
-    font-size: ${({ theme }) => theme.fontSize.l};
     color: ${({ theme }) => theme.colors.neutral[900]};
+    ${typography.l}
   }
 
-  p {
+  ${Text} {
     align-self: start;
-    font-size: ${({ theme }) => theme.fontSize.s};
-    letter-spacing: -0.25px;
-    color: ${({ theme }) => theme.colors.neutral[600]};
   }
 
   span {
