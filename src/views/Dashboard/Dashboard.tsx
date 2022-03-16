@@ -7,6 +7,10 @@ import { db } from "../../firebase";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
 import InvoiceList from "components/organisms/InvoiceList/InvoiceList";
 import { Title } from "components/atoms/Title/Title";
+import { Text } from "components/atoms/Text/Text";
+import useMediaQuery from "hooks/useMediaQuery";
+import { getInvoiceLenghtMessage } from "helpers/getInvoiceLengthMessage";
+import { useTheme } from "styled-components";
 
 type DashboardProps = {};
 
@@ -49,13 +53,19 @@ const Dashboard = (props: DashboardProps) => {
     return () => unsub();
   }, []);
 
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.m);
+
   return (
     <DashboardWrapper>
       <Topbar>
-        <Title>Invoices</Title>
+        <div>
+          <Title>Invoices</Title>
+          <Text>{getInvoiceLenghtMessage(invoices.length, isTablet)}</Text>
+        </div>
 
         <Button onClick={openModal} variant="primary">
-          New Invoice
+          New{isTablet && "  Invoice"}
         </Button>
       </Topbar>
 
