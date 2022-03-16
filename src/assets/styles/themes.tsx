@@ -13,7 +13,8 @@ const theme = {
     s: "0.75rem",
     m: "1rem",
     l: "1.25rem",
-    xl: "2rem",
+    xl: "1.5rem",
+    xxl: "2rem",
   },
 };
 
