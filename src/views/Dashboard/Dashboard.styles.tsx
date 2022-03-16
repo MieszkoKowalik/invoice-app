@@ -37,7 +37,7 @@ export const Topbar = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
-
+  align-items: center;
   margin-top: 32px;
   margin-bottom: 32px;
 
