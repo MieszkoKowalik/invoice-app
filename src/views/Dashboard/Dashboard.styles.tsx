@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Modal from "components/organisms/Modal/Modal";
 import { Button } from "components/atoms/Button/Button";
 import PlusIcon from "assets/images/icon-plus.svg";
+import { Title } from "components/atoms/Title/Title";
 
 export const InvoiceModal = styled(Modal)`
   position: fixed;
@@ -72,5 +73,13 @@ export const NewInvoiceButton = styled(Button)`
     place-items: center;
     font-size: 0;
     border-radius: 50%;
+  }
+`;
+
+export const StyledTitle = styled(Title)`
+  margin-bottom: 4px;
+
+  @media ${({ theme }) => theme.breakpoints.m} {
+    margin-bottom: 8px;
   }
 `;

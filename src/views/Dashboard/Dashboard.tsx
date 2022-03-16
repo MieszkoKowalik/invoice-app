@@ -5,12 +5,12 @@ import {
   InvoiceModal,
   Topbar,
   NewInvoiceButton,
+  StyledTitle,
 } from "./Dashboard.styles";
 import { Invoice } from "types";
 import { db } from "../../firebase";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
 import InvoiceList from "components/organisms/InvoiceList/InvoiceList";
-import { Title } from "components/atoms/Title/Title";
 import { Text } from "components/atoms/Text/Text";
 import useMediaQuery from "hooks/useMediaQuery";
 import { getInvoiceLenghtMessage } from "helpers/getInvoiceLengthMessage";
@@ -64,7 +64,7 @@ const Dashboard = (props: DashboardProps) => {
     <DashboardWrapper>
       <Topbar>
         <div>
-          <Title>Invoices</Title>
+          <StyledTitle>Invoices</StyledTitle>
           <Text>{getInvoiceLenghtMessage(invoices.length, isTablet)}</Text>
         </div>
 
