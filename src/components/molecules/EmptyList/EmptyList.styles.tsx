@@ -26,8 +26,4 @@ export const Wrapper = styled.div`
   ${Text} {
     align-self: start;
   }
-
-  span {
-    font-weight: bold;
-  }
 `;

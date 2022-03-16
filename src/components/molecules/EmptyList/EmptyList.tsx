@@ -10,7 +10,7 @@ const EmptyList = (props: EmptyListProps) => {
       <IllustrationEmpty />
       <h2>There is nothing here</h2>
       <Text>
-        Create a new invoice by clicking the <span>New&nbsp;Invoice</span>{" "}
+        Create a new invoice by clicking the <strong>New&nbsp;Invoice</strong>{" "}
         button and get started
       </Text>
     </Wrapper>
