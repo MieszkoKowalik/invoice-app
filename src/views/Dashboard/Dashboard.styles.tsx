@@ -58,6 +58,7 @@ export const NewInvoiceButton = styled(Button)`
   gap: 8px;
   padding: 6px;
   padding-right: 14px;
+
   @media ${({ theme }) => theme.breakpoints.m} {
     gap: 16px;
     padding: 8px;

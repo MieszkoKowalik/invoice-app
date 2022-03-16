@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
 
   svg {
     margin-bottom: 40px;
+
     @media ${({ theme }) => theme.breakpoints.m} {
       margin-bottom: 64px;
     }
