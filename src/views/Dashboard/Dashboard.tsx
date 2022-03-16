@@ -6,6 +6,7 @@ import { Invoice } from "types";
 import { db } from "../../firebase";
 import { collection, onSnapshot, addDoc } from "firebase/firestore";
 import InvoiceList from "components/organisms/InvoiceList/InvoiceList";
+import { Title } from "components/atoms/Title/Title";
 
 type DashboardProps = {};
 
@@ -51,7 +52,8 @@ const Dashboard = (props: DashboardProps) => {
   return (
     <DashboardWrapper>
       <Topbar>
-        <h1>Invoices</h1>
+        <Title>Invoices</Title>
+
         <Button onClick={openModal} variant="primary">
           New Invoice
         </Button>
