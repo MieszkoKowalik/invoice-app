@@ -9,6 +9,7 @@ export const Wrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr auto 1fr;
   align-items: end;
+  justify-items: center;
 
   svg {
     margin-bottom: 40px;
