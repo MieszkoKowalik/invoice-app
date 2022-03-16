@@ -153,7 +153,7 @@ const InvoiceForm = ({
     const paymentDue = formatDateString(
       createdDate.valueOf() + paymentTermsInMilliseconds
     );
-    setValue("paymentDue", paymentDue === "Invalid Date" ? "" : paymentDue);
+    setValue("paymentDue", paymentDue);
   }, [createdAt, paymentTerms, setValue]);
 
   return (
