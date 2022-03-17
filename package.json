@@ -35,6 +35,7 @@
     "test": " firebase emulators:exec --import=./firebase  \"react-scripts test --watchAll=false --passWithNoTests\" ",
     "test:watch": "react-scripts test",
     "test:emulated": "firebase emulators:exec --import=./firebase  \"npm run test:watch\"",
+    "test:e2e": "cypress open",
     "firebase": "firebase emulators:start --import=./firebase --export-on-exit=./firebase",
     "eject": "react-scripts eject",
     "prepare": "husky install",
@@ -45,12 +46,17 @@
     "extends": [
       "react-app",
       "react-app/jest",
-      "prettier"
+      "prettier",
+      "plugin:cypress/recommended"
+    ],
+    "plugins": [
+      "cypress"
     ],
     "env": {
       "browser": true,
       "node": true,
-      "es6": true
+      "es6": true,
+      "cypress/globals": true
     },
     "overrides": [
       {
@@ -76,6 +82,8 @@
     ]
   },
   "devDependencies": {
+    "@cypress/react": "^5.12.4",
+    "@cypress/webpack-dev-server": "^1.8.3",
     "@storybook/addon-actions": "^6.4.14",
     "@storybook/addon-essentials": "^6.4.14",
     "@storybook/addon-links": "^6.4.14",
@@ -84,8 +92,11 @@
     "@storybook/node-logger": "^6.4.14",
     "@storybook/preset-create-react-app": "^4.0.0",
     "@storybook/react": "^6.4.14",
+    "@testing-library/cypress": "^8.0.2",
+    "cypress": "^9.5.2",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-prettier": "^4.0.0",
     "firebase-tools": "^10.1.2",
     "husky": "^7.0.0",
