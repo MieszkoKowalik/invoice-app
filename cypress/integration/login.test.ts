@@ -6,6 +6,7 @@ describe("login", () => {
   it("Displays login page", () => {
     cy.visit("/");
     cy.findByText("Log in").should("exist");
+    cy.findByLabelText(/Email/).should("exist");
   });
 
   it("Shows errors when invalid data provided", () => {
@@ -13,6 +14,11 @@ describe("login", () => {
     cy.findByText("Log in").click();
     cy.findAllByText("Can't be empty").should("have.length", 2);
 
+    cy.findByLabelText(/Email/).type("Test123");
+    cy.findByText("Please enter valid email").should("exist");
+
+    cy.findByLabelText(/Email/).clear();
+    cy.findByLabelText(/Password/).clear();
     cy.findByLabelText(/Email/).type("Test123@test123.com");
     cy.findByLabelText(/Password/).type("WrongPassword");
     cy.findByText("Log in").click();
@@ -47,6 +53,6 @@ describe("login", () => {
     cy.findByLabelText("Email").type("Test123@test123.com");
     cy.findByLabelText("Password").type("Test123");
     cy.findByText("Log in").click();
-    cy.findByText("Invoices").should("exist");
+    cy.findByText("Sign Out").should("exist");
   });
 });
