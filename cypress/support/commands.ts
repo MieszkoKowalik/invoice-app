@@ -28,6 +28,6 @@ import "@testing-library/cypress/add-commands";
 Cypress.Commands.add("resetInvoicesDB", () => {
   cy.request(
     "DELETE",
-    "http://localhost:8080/emulator/v1/projects/invoiceapp-5584a/databases/(default)/invoices"
+    "http://localhost:8080/emulator/v1/projects/invoiceapp-5584a/databases/(default)/documents/invoices"
   );
 });
