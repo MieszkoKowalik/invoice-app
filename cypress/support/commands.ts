@@ -31,3 +31,10 @@ Cypress.Commands.add("resetInvoicesDB", () => {
     "http://localhost:8080/emulator/v1/projects/invoiceapp-5584a/databases/(default)/documents/invoices"
   );
 });
+
+Cypress.Commands.add("login", () => {
+  cy.visit("/");
+  cy.findByLabelText("Email").type("Test123@test123.com");
+  cy.findByLabelText("Password").type("Test123");
+  cy.findByText("Log in").click();
+});

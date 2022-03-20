@@ -26,6 +26,7 @@ declare global {
        * @example cy.dataCy('greeting')
        */
       resetInvoicesDB(): Chainable<Element>;
+      login(): Chainable<Element>;
     }
   }
 }
