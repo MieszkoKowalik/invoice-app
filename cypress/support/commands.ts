@@ -24,6 +24,11 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import "@testing-library/cypress/add-commands";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/database";
+import "firebase/compat/firestore";
+import { attachCustomCommands } from "cypress-firebase";
 
 Cypress.Commands.add("resetInvoicesDB", () => {
   cy.request(
@@ -32,9 +37,18 @@ Cypress.Commands.add("resetInvoicesDB", () => {
   );
 });
 
-Cypress.Commands.add("login", () => {
-  cy.visit("/");
-  cy.findByLabelText("Email").type("Test123@test123.com");
-  cy.findByLabelText("Password").type("Test123");
-  cy.findByText("Log in").click();
-});
+const firebaseConfig = {
+  apiKey: Cypress.env("REACT_APP_FIREBASE_API"),
+  authDomain: Cypress.env("REACT_APP_FIREBASE_DOMAIN"),
+  projectId: Cypress.env("REACT_APP_FIREBASE_PROJECT_ID"),
+  storageBucket: Cypress.env("REACT_APP_FIREBASE_BUCKET"),
+  messagingSenderId: Cypress.env("REACT_APP_FIREBASE_SENDER_ID"),
+  appId: Cypress.env("REACT_APP_FIREBASE_APP_ID"),
+  measurementId: Cypress.env("REACT_APP_FIREBASE_MEASUREMENT_ID"),
+};
+
+firebase.initializeApp(firebaseConfig);
+
+firebase.auth().useEmulator(`http://localhost:9099/`);
+
+attachCustomCommands({ Cypress, cy, firebase });

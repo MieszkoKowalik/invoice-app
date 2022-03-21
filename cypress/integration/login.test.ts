@@ -1,6 +1,6 @@
 describe("login", () => {
   beforeEach(() => {
-    indexedDB.deleteDatabase("firebaseLocalStorageDb");
+    cy.logout();
   });
 
   it("Displays login page", () => {

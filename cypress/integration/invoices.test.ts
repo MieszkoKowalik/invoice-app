@@ -1,8 +1,9 @@
 describe("login", () => {
   beforeEach(() => {
-    indexedDB.deleteDatabase("firebaseLocalStorageDb");
-    cy.login();
     cy.resetInvoicesDB();
+    cy.visit("/");
+    cy.logout();
+    cy.login("0NkQafvuOo5jySTN8Bx6GcThDUzp");
   });
 
   it("Can add draft invoice", () => {
