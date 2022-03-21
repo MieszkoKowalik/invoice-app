@@ -44,11 +44,15 @@ const Login = (props: LoginProps) => {
   const locationState = location.state as LocationState;
   const from = locationState?.from?.path || "/";
 
-  const { logIn } = useAuth();
+  const { logIn, user } = useAuth();
 
   const navigateToPreviousPage = () => {
     navigate(from, { replace: true });
   };
+
+  if (user) {
+    navigateToPreviousPage();
+  }
 
   const [alert, setAlert] = useState("");
 

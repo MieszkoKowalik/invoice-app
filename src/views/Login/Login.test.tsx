@@ -2,13 +2,24 @@ import { render, screen, RenderOptions } from "test-utils";
 import userEvent from "@testing-library/user-event";
 import Login from "./Login";
 import { ReactElement } from "react";
-import AuthProvider from "providers/AuthProvider";
+import { AuthContext } from "providers/AuthProvider";
+import { waitFor } from "@testing-library/react";
+
+const authValue = {
+  user: null,
+  isAuthLoading: true,
+  logIn: jest.fn(),
+  logOut: jest.fn(),
+};
 
 const renderWithAuthProvider = (
   ui: ReactElement,
   renderOptions?: RenderOptions
 ) => {
-  return render(<AuthProvider>{ui}</AuthProvider>, renderOptions);
+  return render(
+    <AuthContext.Provider value={authValue}>{ui}</AuthContext.Provider>,
+    renderOptions
+  );
 };
 
 describe("Login view", () => {
@@ -34,34 +45,13 @@ describe("Login view", () => {
     ).toBeInTheDocument();
   });
 
-  it("Signs in user if entered valid email and password", async () => {
+  it("Submits form if valid email and password are used", async () => {
     renderWithAuthProvider(<Login />);
     userEvent.type(screen.getByLabelText(/email/i), "test123@test123.com");
     userEvent.type(screen.getByLabelText(/password/i), "Test123");
     userEvent.click(screen.getByText(/log in/i));
-    expect(
-      screen.queryByText(/Please enter valid email/i)
-    ).not.toBeInTheDocument();
-    expect(screen.queryByText(/can't be empty/i)).not.toBeInTheDocument();
-  });
-
-  it("Displays error when there is no account with provided email", async () => {
-    renderWithAuthProvider(<Login />);
-    userEvent.type(screen.getByLabelText(/email/i), "invalidEmail@test123.com");
-    userEvent.type(screen.getByLabelText(/password/i), "Test123");
-    userEvent.click(screen.getByText(/log in/i));
-    expect(
-      await screen.findByText(
-        /We couldn't find an account conected to this email/i
-      )
-    ).toBeInTheDocument();
-  });
-
-  it("Displays error when wrong password is provided", async () => {
-    renderWithAuthProvider(<Login />);
-    userEvent.type(screen.getByLabelText(/email/i), "test123@test123.com");
-    userEvent.type(screen.getByLabelText(/password/i), "InvalidPassword");
-    userEvent.click(screen.getByText(/log in/i));
-    expect(await screen.findByText(/Wrong password/i)).toBeInTheDocument();
+    await waitFor(() => {
+      expect(authValue.logIn).toBeCalled();
+    });
   });
 });

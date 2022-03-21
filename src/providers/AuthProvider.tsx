@@ -25,7 +25,7 @@ interface AuthContextInterface {
   logOut: () => void;
 }
 
-const AuthContext = createContext<AuthContextInterface>(
+export const AuthContext = createContext<AuthContextInterface>(
   {} as AuthContextInterface
 );
 
