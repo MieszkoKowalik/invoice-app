@@ -32,7 +32,7 @@
     "start": "react-scripts start",
     "start:emulated": "firebase emulators:exec --import=./firebase --export-on-exit=./firebase \"npm start\"",
     "build": "react-scripts build",
-    "test": " firebase emulators:exec --import=./firebase  \"react-scripts test --watchAll=false --passWithNoTests\" ",
+    "test": "react-scripts test --watchAll=false --passWithNoTests",
     "test:watch": "react-scripts test",
     "test:emulated": "firebase emulators:exec --import=./firebase  \"npm run test:watch\"",
     "test:e2e": "cypress open",
