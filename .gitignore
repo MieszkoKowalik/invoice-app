@@ -27,3 +27,5 @@ ui-debug.log
 firebase-debug.log
 .firebaserc
 firestore-debug.log
+cypress.env.json
+serviceAccount.json
