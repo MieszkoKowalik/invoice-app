@@ -245,7 +245,6 @@ const InvoiceForm = ({
               error={errors.createdAt?.message}
               label="Invoice Date"
               type="date"
-              min={new Date().toLocaleDateString("en-ca")}
             />
           </GridCell>
 
@@ -336,7 +335,11 @@ const InvoiceForm = ({
                   />
                 </GridCell>
                 <GridCell area="btn">
-                  <DeleteButton type="button" onClick={() => remove(index)}>
+                  <DeleteButton
+                    type="button"
+                    aria-label="Delete item"
+                    onClick={() => remove(index)}
+                  >
                     <DeleteIcon />
                   </DeleteButton>
                 </GridCell>
