@@ -62,8 +62,20 @@ const Dashboard = (props: DashboardProps) => {
   const isTablet = useMediaQuery(theme.breakpoints.m);
 
   const variants = {
-    hidden: { opacity: 0, x: -50 },
-    show: { opacity: 1, x: 0 },
+    hidden: {
+      opacity: 0,
+      x: -50,
+      transition: {
+        ease: "easeOut",
+      },
+    },
+    show: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        ease: "easeOut",
+      },
+    },
   };
 
   return (
