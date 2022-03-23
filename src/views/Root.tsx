@@ -19,6 +19,14 @@ const Root = () => {
               </RequireAuth>
             }
           />
+          <Route
+            path="/invoice/:id"
+            element={
+              <RequireAuth>
+                <div>Invoice view</div>
+              </RequireAuth>
+            }
+          />
         </Routes>
       </AnimatePresence>
     </MainTemplate>
