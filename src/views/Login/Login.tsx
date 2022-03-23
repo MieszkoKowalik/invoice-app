@@ -6,7 +6,7 @@ import { LoginWrapper } from "./Login.styles";
 import * as yup from "yup";
 import { useAuth } from "providers/AuthProvider";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Alert } from "components/molecules/Alert/Alert";
 
 type LoginProps = {};
@@ -46,18 +46,20 @@ const Login = (props: LoginProps) => {
 
   const { logIn, user } = useAuth();
 
-  const navigateToPreviousPage = () => {
+  const navigateToPreviousPage = useCallback(() => {
     navigate(from, { replace: true });
-  };
-
-  if (user) {
-    navigateToPreviousPage();
-  }
+  }, [navigate, from]);
 
   const [alert, setAlert] = useState("");
 
   const onSubmit: SubmitHandler<FormInputs> = (data) =>
     logIn(data, navigateToPreviousPage, setAlert);
+
+  useEffect(() => {
+    if (user) {
+      navigateToPreviousPage();
+    }
+  }, [user, navigateToPreviousPage]);
 
   return (
     <>
