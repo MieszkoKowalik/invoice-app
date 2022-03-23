@@ -15,6 +15,7 @@ import { Text } from "components/atoms/Text/Text";
 import useMediaQuery from "hooks/useMediaQuery";
 import { getInvoiceLenghtMessage } from "helpers/getInvoiceLengthMessage";
 import { useTheme } from "styled-components";
+import { motion } from "framer-motion";
 
 type DashboardProps = {};
 
@@ -60,9 +61,20 @@ const Dashboard = (props: DashboardProps) => {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.m);
 
+  const variants = {
+    hidden: { opacity: 0, x: -50 },
+    show: { opacity: 1, x: 0 },
+  };
+
   return (
     <DashboardWrapper>
-      <Topbar>
+      <Topbar
+        as={motion.div}
+        variants={variants}
+        initial="hidden"
+        animate="show"
+        exit="hidden"
+      >
         <div>
           <StyledTitle>Invoices</StyledTitle>
           <Text>{getInvoiceLenghtMessage(invoices.length, isTablet)}</Text>
