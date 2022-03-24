@@ -2,13 +2,13 @@ import { Invoice } from "types";
 import InvoiceCard from "components/molecules/InvoiceListCard/InvoiceCard";
 import { StyledUl, StyledLink } from "./InvoiceList.styles";
 import EmptyList from "components/molecules/EmptyList/EmptyList";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
 type InvoiceListProps = {
   invoices: Invoice[];
 };
 
-const list = {
+const listVariants: Variants = {
   hidden: {
     opacity: 0,
     transition: {
@@ -24,7 +24,7 @@ const list = {
   },
 };
 
-const item = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: -20 },
   show: { opacity: 1, y: 0 },
 };
@@ -34,15 +34,14 @@ const InvoiceList = ({ invoices }: InvoiceListProps) => {
     <>
       {invoices.length ? (
         <StyledUl
-          as={motion.ul}
-          variants={list}
+          variants={listVariants}
           initial="hidden"
           animate="show"
           exit="hidden"
         >
           {invoices.map((invoice: Invoice) => {
             return (
-              <motion.li key={invoice.id} variants={item}>
+              <motion.li key={invoice.id} variants={itemVariants}>
                 <StyledLink to={`invoice/${invoice.id}`}>
                   <InvoiceCard invoice={invoice} />
                 </StyledLink>
