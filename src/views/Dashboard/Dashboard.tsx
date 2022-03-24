@@ -15,7 +15,7 @@ import { Text } from "components/atoms/Text/Text";
 import useMediaQuery from "hooks/useMediaQuery";
 import { getInvoiceLenghtMessage } from "helpers/getInvoiceLengthMessage";
 import { useTheme } from "styled-components";
-import { motion } from "framer-motion";
+import { Variants } from "framer-motion";
 
 type DashboardProps = {};
 
@@ -61,7 +61,7 @@ const Dashboard = (props: DashboardProps) => {
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.m);
 
-  const variants = {
+  const topbarVariants: Variants = {
     hidden: {
       opacity: 0,
       x: -50,
@@ -81,8 +81,7 @@ const Dashboard = (props: DashboardProps) => {
   return (
     <DashboardWrapper>
       <Topbar
-        as={motion.div}
-        variants={variants}
+        variants={topbarVariants}
         initial="hidden"
         animate="show"
         exit="hidden"

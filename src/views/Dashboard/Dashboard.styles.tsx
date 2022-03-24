@@ -3,6 +3,7 @@ import Modal from "components/organisms/Modal/Modal";
 import { Button } from "components/atoms/Button/Button";
 import PlusIcon from "assets/images/icon-plus.svg";
 import { Title } from "components/atoms/Title/Title";
+import { motion } from "framer-motion";
 
 export const InvoiceModal = styled(Modal)`
   position: fixed;
@@ -33,7 +34,7 @@ export const DashboardWrapper = styled.div`
   max-width: 730px;
 `;
 
-export const Topbar = styled.div`
+export const Topbar = styled(motion.div)`
   display: flex;
   width: 100%;
   justify-content: space-between;
