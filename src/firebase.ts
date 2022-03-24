@@ -1,10 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, connectAuthEmulator } from "firebase/auth";
-import {
-  initializeFirestore,
-  FirestoreSettings,
-  connectFirestoreEmulator,
-} from "firebase/firestore";
+import { initializeFirestore, FirestoreSettings } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API,
@@ -19,15 +15,19 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 
-const settings: FirestoreSettings = {};
+let settings: FirestoreSettings = {};
 if (process.env.NODE_ENV !== "production") {
-  settings.experimentalAutoDetectLongPolling = true;
+  settings = {
+    host: "localhost:8080",
+    ssl: false,
+    experimentalForceLongPolling: true,
+  };
 }
+
 const db = initializeFirestore(app, settings);
 
 if (process.env.NODE_ENV !== "production") {
   connectAuthEmulator(auth, "http://localhost:9099");
-  connectFirestoreEmulator(db, "localhost", 8080);
 }
 
 export { auth, db };
