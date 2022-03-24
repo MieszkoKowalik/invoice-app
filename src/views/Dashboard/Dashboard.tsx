@@ -19,6 +19,23 @@ import { Variants } from "framer-motion";
 
 type DashboardProps = {};
 
+const topbarVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -50,
+    transition: {
+      ease: "easeOut",
+    },
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      ease: "easeOut",
+    },
+  },
+};
+
 const Dashboard = (props: DashboardProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -60,23 +77,6 @@ const Dashboard = (props: DashboardProps) => {
 
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.m);
-
-  const topbarVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      x: -50,
-      transition: {
-        ease: "easeOut",
-      },
-    },
-    show: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        ease: "easeOut",
-      },
-    },
-  };
 
   return (
     <DashboardWrapper>
