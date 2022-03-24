@@ -16,6 +16,7 @@ import useMediaQuery from "hooks/useMediaQuery";
 import { getInvoiceLenghtMessage } from "helpers/getInvoiceLengthMessage";
 import { useTheme } from "styled-components";
 import { Variants } from "framer-motion";
+import Loader from "components/molecules/Loader/Loader";
 
 type DashboardProps = {};
 
@@ -38,6 +39,7 @@ const topbarVariants: Variants = {
 
 const Dashboard = (props: DashboardProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -70,14 +72,20 @@ const Dashboard = (props: DashboardProps) => {
       );
       console.log(invoices);
       setInvoices(invoices);
+      if (isLoading) {
+        setIsLoading(false);
+      }
     });
 
     return () => unsub();
-  }, []);
+  }, [isLoading]);
 
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.m);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <DashboardWrapper>
       <Topbar
