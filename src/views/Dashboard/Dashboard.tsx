@@ -15,11 +15,31 @@ import { Text } from "components/atoms/Text/Text";
 import useMediaQuery from "hooks/useMediaQuery";
 import { getInvoiceLenghtMessage } from "helpers/getInvoiceLengthMessage";
 import { useTheme } from "styled-components";
+import { Variants } from "framer-motion";
+import Loader from "components/molecules/Loader/Loader";
 
 type DashboardProps = {};
 
+const topbarVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    x: -50,
+    transition: {
+      ease: "easeOut",
+    },
+  },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      ease: "easeOut",
+    },
+  },
+};
+
 const Dashboard = (props: DashboardProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -52,17 +72,28 @@ const Dashboard = (props: DashboardProps) => {
       );
       console.log(invoices);
       setInvoices(invoices);
+      if (isLoading) {
+        setIsLoading(false);
+      }
     });
 
     return () => unsub();
-  }, []);
+  }, [isLoading]);
 
   const theme = useTheme();
   const isTablet = useMediaQuery(theme.breakpoints.m);
 
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <DashboardWrapper>
-      <Topbar>
+      <Topbar
+        variants={topbarVariants}
+        initial="hidden"
+        animate="show"
+        exit="hidden"
+      >
         <div>
           <StyledTitle>Invoices</StyledTitle>
           <Text>{getInvoiceLenghtMessage(invoices.length, isTablet)}</Text>
