@@ -3,7 +3,6 @@ import { useAuth } from "providers/AuthProvider";
 
 function RequireAuth({ children }: { children: JSX.Element }) {
   const { user, isAuthLoading } = useAuth();
-  console.log(user);
   const location = useLocation();
 
   if (isAuthLoading) {

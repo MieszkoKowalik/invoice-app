@@ -2,7 +2,7 @@ import MainTemplate from "components/templates/MainTemplate/MainTemplate";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Dashboard from "./Dashboard/Dashboard";
 import Login from "./Login/Login";
-import RequireAuth from "helpers/RequireAuth";
+import RequireAuth from "components/organisms/RequireAuth/RequireAuth";
 import { AnimatePresence } from "framer-motion";
 
 const Root = () => {
