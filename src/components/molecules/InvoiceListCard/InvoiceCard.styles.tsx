@@ -20,7 +20,7 @@ export const Wrapper = styled.div`
     align-items: center;
     grid-auto-flow: column;
     justify-content: start;
-    grid-template-columns: 87px 230px 1fr auto auto;
+    grid-template-columns: 87px 175px 1fr auto auto;
     grid-template-areas: "id date client amount badge";
   }
 
