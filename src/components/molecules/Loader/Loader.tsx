@@ -1,0 +1,39 @@
+import { motion, Variants } from "framer-motion";
+import { useTheme } from "styled-components";
+
+type loaderProps = {};
+
+const loaderVariants: Variants = {
+  initial: { pathLength: 0, pathOffset: 0 },
+  animate: {
+    pathLength: [0, 0.5, 1, 1, 1, 1],
+    pathOffset: [0, 0, 0, 0, 0.5, 1],
+    transition: {
+      repeat: Infinity,
+      duration: 1.5,
+      ease: "linear",
+    },
+  },
+};
+
+const Loader = (props: loaderProps) => {
+  const theme = useTheme();
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" viewBox="0 0 30 28">
+      <title>Loading...</title>
+      <motion.path
+        initial="initial"
+        animate="animate"
+        variants={loaderVariants}
+        stroke={theme.colors.primary[500]}
+        stroke-linecap="square"
+        stroke-width="1"
+        fill="transparent"
+        transform="translate(1,1)"
+        d="M20.513 0C24.965 2.309 28 6.91 28 12.21 28 19.826 21.732 26 14 26S0 19.826 0 12.21C0 6.91 3.035 2.309 7.487 0L14 12.9z"
+      />
+    </svg>
+  );
+};
+
+export default Loader;
