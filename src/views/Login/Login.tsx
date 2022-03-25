@@ -8,7 +8,7 @@ import { useAuth } from "providers/AuthProvider";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { Alert } from "components/molecules/Alert/Alert";
-import { motion, Variants } from "framer-motion";
+import { Variants } from "framer-motion";
 
 type LoginProps = {};
 
