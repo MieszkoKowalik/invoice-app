@@ -8,6 +8,7 @@ import { useAuth } from "providers/AuthProvider";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useCallback, useEffect, useState } from "react";
 import { Alert } from "components/molecules/Alert/Alert";
+import { motion, Variants } from "framer-motion";
 
 type LoginProps = {};
 
@@ -31,6 +32,20 @@ const schema = yup
     password: yup.string().required("Can't be empty"),
   })
   .required();
+
+const loginVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.2,
+    transition: {
+      ease: "easeInOut",
+    },
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+  },
+};
 
 const Login = (props: LoginProps) => {
   const {
@@ -63,22 +78,29 @@ const Login = (props: LoginProps) => {
 
   return (
     <>
-      <LoginWrapper onSubmit={handleSubmit(onSubmit)}>
-        <LabeledInput
-          {...register("email")}
-          error={errors.email?.message}
-          label="Email"
-        ></LabeledInput>
-        <LabeledInput
-          {...register("password")}
-          type="password"
-          error={errors.password?.message}
-          label="Password"
-        ></LabeledInput>
-        <Button type="submit" variant="primary">
-          Log in
-        </Button>
-        {alert.length ? <Alert variant="danger">{alert}</Alert> : null}
+      <LoginWrapper
+        variants={loginVariants}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+      >
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <LabeledInput
+            {...register("email")}
+            error={errors.email?.message}
+            label="Email"
+          ></LabeledInput>
+          <LabeledInput
+            {...register("password")}
+            type="password"
+            error={errors.password?.message}
+            label="Password"
+          ></LabeledInput>
+          <Button type="submit" variant="primary">
+            Log in
+          </Button>
+          {alert.length ? <Alert variant="danger">{alert}</Alert> : null}
+        </form>
       </LoginWrapper>
     </>
   );
