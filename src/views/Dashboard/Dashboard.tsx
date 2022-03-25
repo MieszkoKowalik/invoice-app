@@ -28,7 +28,7 @@ const topbarVariants: Variants = {
       ease: "easeOut",
     },
   },
-  show: {
+  visible: {
     opacity: 1,
     x: 0,
     transition: {
@@ -91,7 +91,7 @@ const Dashboard = (props: DashboardProps) => {
       <Topbar
         variants={topbarVariants}
         initial="hidden"
-        animate="show"
+        animate="visible"
         exit="hidden"
       >
         <div>
