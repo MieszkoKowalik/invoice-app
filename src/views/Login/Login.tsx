@@ -79,6 +79,11 @@ const Login = (props: LoginProps) => {
           Log in
         </Button>
         {alert.length ? <Alert variant="danger">{alert}</Alert> : null}
+        <Alert variant="warning">
+          <p>Try these credentials</p>
+          <p>Email: test123@test123.com</p>
+          <p>Password: Test123</p>
+        </Alert>
       </LoginWrapper>
     </>
   );
