@@ -53,6 +53,6 @@ describe("login", () => {
     cy.findByLabelText("Email").type("Test123@test123.com");
     cy.findByLabelText("Password").type("Test123");
     cy.findByText("Log in").click();
-    cy.findByText("Sign Out").should("exist");
+    cy.findByText("Log Out").should("exist");
   });
 });
