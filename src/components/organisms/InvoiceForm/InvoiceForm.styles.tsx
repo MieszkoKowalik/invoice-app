@@ -1,6 +1,7 @@
 import { Button } from "components/atoms/Button/Button";
 import styled from "styled-components";
 import { ErrorSpan } from "components/atoms/ErrorSpan/ErrorSpan";
+import { TransparentButton } from "components/atoms/TransparentButton/TransparentButton";
 
 export const FormWrapper = styled.div`
   padding: 24px 0px 24px 24px;
@@ -134,10 +135,7 @@ export const ItemsFieldset = styled.fieldset`
   }
 `;
 
-export const DeleteButton = styled.button`
-  background: transparent;
-  border: none;
-  cursor: pointer;
+export const DeleteButton = styled(TransparentButton)`
   height: 48px;
   display: flex;
   align-items: center;
