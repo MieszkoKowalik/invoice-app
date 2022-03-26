@@ -5,8 +5,7 @@ import { Button } from "components/atoms/Button/Button";
 import { LoginWrapper } from "./Login.styles";
 import * as yup from "yup";
 import { useAuth } from "providers/AuthProvider";
-import { useNavigate, useLocation } from "react-router-dom";
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { Alert } from "components/molecules/Alert/Alert";
 import { Variants } from "framer-motion";
 
@@ -15,12 +14,6 @@ type LoginProps = {};
 type FormInputs = {
   email: string;
   password: string;
-};
-
-type LocationState = {
-  from?: {
-    path: string;
-  };
 };
 
 const schema = yup
@@ -54,36 +47,16 @@ const Login = (props: LoginProps) => {
     handleSubmit,
   } = useForm<FormInputs>({ resolver: yupResolver(schema) });
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const locationState = location.state as LocationState;
-  const from = locationState?.from?.path || "/";
-
-  const { logIn, user } = useAuth();
-
-  const navigateToPreviousPage = useCallback(() => {
-    navigate(from, { replace: true });
-  }, [navigate, from]);
+  const { logIn } = useAuth();
 
   const [alert, setAlert] = useState("");
 
   const onSubmit: SubmitHandler<FormInputs> = (data) =>
-    logIn(data, navigateToPreviousPage, setAlert);
-
-  useEffect(() => {
-    if (user) {
-      navigateToPreviousPage();
-    }
-  }, [user, navigateToPreviousPage]);
+    logIn(data, () => {}, setAlert);
 
   return (
     <>
-      <LoginWrapper
-        variants={loginVariants}
-        initial="hidden"
-        animate="visible"
-        exit="hidden"
-      >
+      <LoginWrapper variants={loginVariants} initial="hidden" animate="visible">
         <form onSubmit={handleSubmit(onSubmit)}>
           <LabeledInput
             {...register("email")}
