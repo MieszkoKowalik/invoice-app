@@ -18,8 +18,10 @@ interface AuthContextInterface {
   user: User | null;
   isAuthLoading: boolean;
   logIn: (
-    data: { email: string; password: string },
-    onSuccess: VoidFunction,
+    data: {
+      email: string;
+      password: string;
+    },
     onError: Function
   ) => void;
   logOut: () => void;
@@ -37,19 +39,20 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
 
-  const logIn = (
-    { email, password }: { email: string; password: string },
-    onSuccess: VoidFunction,
+  const logIn = async (
+    {
+      email,
+      password,
+    }: {
+      email: string;
+      password: string;
+    },
     onError: Function
   ) => {
-    signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        onSuccess();
-      })
-      .catch((error) => {
-        const message = handleFirebaseAuthError(error.code);
-        onError(message);
-      });
+    signInWithEmailAndPassword(auth, email, password).catch((error) => {
+      const message = handleFirebaseAuthError(error.code);
+      onError(message);
+    });
   };
 
   const logOut = () => {
@@ -80,7 +83,7 @@ export default AuthProvider;
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within a AuthProvider");
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };

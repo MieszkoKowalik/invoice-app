@@ -51,8 +51,7 @@ const Login = (props: LoginProps) => {
 
   const [alert, setAlert] = useState("");
 
-  const onSubmit: SubmitHandler<FormInputs> = (data) =>
-    logIn(data, () => {}, setAlert);
+  const onSubmit: SubmitHandler<FormInputs> = (data) => logIn(data, setAlert);
 
   return (
     <>
