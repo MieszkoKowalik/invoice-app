@@ -16,7 +16,7 @@ const listVariants: Variants = {
       staggerDirection: -1,
     },
   },
-  show: {
+  visible: {
     opacity: 1,
     transition: {
       staggerChildren: 0.05,
@@ -26,7 +26,7 @@ const listVariants: Variants = {
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: -20 },
-  show: { opacity: 1, y: 0 },
+  visible: { opacity: 1, y: 0 },
 };
 
 const InvoiceList = ({ invoices }: InvoiceListProps) => {
@@ -36,7 +36,7 @@ const InvoiceList = ({ invoices }: InvoiceListProps) => {
         <StyledUl
           variants={listVariants}
           initial="hidden"
-          animate="show"
+          animate="visible"
           exit="hidden"
         >
           {invoices.map((invoice: Invoice) => {

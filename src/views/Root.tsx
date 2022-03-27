@@ -1,38 +1,16 @@
-import MainTemplate from "components/templates/MainTemplate/MainTemplate";
-import { Routes, Route, useLocation } from "react-router-dom";
-import Dashboard from "./Dashboard/Dashboard";
 import Login from "./Login/Login";
-import RequireAuth from "components/organisms/RequireAuth/RequireAuth";
-import { AnimatePresence } from "framer-motion";
+import { useAuth } from "providers/AuthProvider";
+import Loader from "components/molecules/Loader/Loader";
+import AuthenticatedApp from "./AuthenticatedApp/AuthenticatedApp";
 
 const Root = () => {
-  const location = useLocation();
+  const { user, isAuthLoading } = useAuth();
 
-  return (
-    <MainTemplate>
-      <AnimatePresence exitBeforeEnter>
-        <Routes location={location} key={location.pathname}>
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/"
-            element={
-              <RequireAuth>
-                <Dashboard />
-              </RequireAuth>
-            }
-          />
-          <Route
-            path="/invoice/:id"
-            element={
-              <RequireAuth>
-                <div>Invoice view</div>
-              </RequireAuth>
-            }
-          />
-        </Routes>
-      </AnimatePresence>
-    </MainTemplate>
-  );
+  if (isAuthLoading) {
+    return <Loader />;
+  }
+
+  return <>{user ? <AuthenticatedApp /> : <Login key="login" />}</>;
 };
 
 export default Root;
