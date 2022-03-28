@@ -70,4 +70,10 @@ describe("login", () => {
     cy.findByText("There is 1 invoice").should("exist");
     cy.findByText(this.invoice.clientName).should("exist");
   });
+
+  it("Redirects to invoice view on invoice click", function () {
+    cy.callFirestore("set", `invoices/${this.invoice.id}`, this.invoice);
+    cy.findByText(this.invoice.id).click();
+    cy.location("pathname").should("eq", `/invoice/${this.invoice.id}`);
+  });
 });
