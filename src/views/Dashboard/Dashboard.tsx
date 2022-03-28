@@ -9,7 +9,7 @@ import {
 } from "./Dashboard.styles";
 import { Invoice } from "types";
 import { db } from "../../firebase";
-import { collection, onSnapshot, addDoc } from "firebase/firestore";
+import { collection, onSnapshot, setDoc, doc } from "firebase/firestore";
 import InvoiceList from "components/organisms/InvoiceList/InvoiceList";
 import { Text } from "components/atoms/Text/Text";
 import useMediaQuery from "hooks/useMediaQuery";
@@ -53,7 +53,7 @@ const Dashboard = (props: DashboardProps) => {
 
   const addInvoice = async (data: Invoice) => {
     try {
-      await addDoc(collection(db, "invoices"), data);
+      await setDoc(doc(db, "invoices", data.id), data);
     } catch (e) {
       console.error("Error while adding document: ", e);
     }
