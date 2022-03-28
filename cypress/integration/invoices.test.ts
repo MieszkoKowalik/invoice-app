@@ -1,4 +1,4 @@
-describe("login", () => {
+describe("Invoices view", () => {
   beforeEach(() => {
     cy.resetInvoicesDB();
     cy.visit("/");
