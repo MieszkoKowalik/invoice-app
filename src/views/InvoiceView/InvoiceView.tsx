@@ -4,6 +4,8 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Invoice } from "types";
 import { useState } from "react";
+import { StyledLink } from "./InvoiceView.style";
+import { ReactComponent as IconLeft } from "assets/images/icon-arrow-left.svg";
 
 type InvoiceProps = {};
 
@@ -27,7 +29,14 @@ const InvoiceView = (props: InvoiceProps) => {
       }
     })();
   }, [id]);
-  return <div>Invoice view</div>;
+  return (
+    <div>
+      <StyledLink to="/">
+        <IconLeft />
+        Go back
+      </StyledLink>
+    </div>
+  );
 };
 
 export default InvoiceView;
