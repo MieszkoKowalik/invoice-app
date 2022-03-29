@@ -1,3 +1,5 @@
+export type Status = "paid" | "pending" | "draft";
+
 export interface Invoice {
   id: string;
   createdAt: string;
@@ -6,7 +8,7 @@ export interface Invoice {
   paymentTerms: { value: number; label: string };
   clientName: string;
   clientEmail: string;
-  status: "paid" | "pending" | "draft";
+  status: Status;
   senderAddress: {
     street: string;
     city: string;

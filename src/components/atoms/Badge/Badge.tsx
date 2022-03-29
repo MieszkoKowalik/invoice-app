@@ -1,7 +1,8 @@
 import { Wrapper } from "./Badge.styles";
+import { Status } from "types";
 
 export type BadgeProps = {
-  variant: "paid" | "pending" | "draft";
+  variant: Status;
   className?: string;
 };
 
