@@ -28,3 +28,14 @@ export const Wrapper = styled.div`
     margin-top: 64px;
   }
 `;
+
+export const ControlsWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.neutral[50]};
+`;

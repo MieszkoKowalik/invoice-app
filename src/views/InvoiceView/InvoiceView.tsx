@@ -4,10 +4,13 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Invoice } from "types";
 import { useState } from "react";
-import { StyledLink, Wrapper } from "./InvoiceView.style";
+import { StyledLink, Wrapper, ControlsWrapper } from "./InvoiceView.style";
 import { ReactComponent as IconLeft } from "assets/images/icon-arrow-left.svg";
 import StatusBar from "components/organisms/StatusBar/StatusBar";
 import Loader from "components/molecules/Loader/Loader";
+import InvoiceControls from "components/molecules/InvoiceControls/InvoiceControls";
+import { useTheme } from "styled-components";
+import useMediaQuery from "hooks/useMediaQuery";
 
 type InvoiceProps = {};
 
@@ -15,6 +18,8 @@ const InvoiceView = (props: InvoiceProps) => {
   const [invoice, setInvoice] = useState<Invoice | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
+  const theme = useTheme();
+  const isTablet = useMediaQuery(theme.breakpoints.m);
 
   useEffect(() => {
     if (!id) return;
@@ -45,7 +50,17 @@ const InvoiceView = (props: InvoiceProps) => {
         <IconLeft />
         Go back
       </StyledLink>
-      {invoice && <StatusBar status={invoice.status} />}
+      {invoice && (
+        <>
+          <StatusBar status={invoice.status} />
+
+          {!isTablet && (
+            <ControlsWrapper>
+              <InvoiceControls status={invoice.status} />
+            </ControlsWrapper>
+          )}
+        </>
+      )}
     </Wrapper>
   );
 };
