@@ -6,7 +6,7 @@ import { Invoice } from "types";
 import { useState } from "react";
 import { StyledLink } from "./InvoiceView.style";
 import { ReactComponent as IconLeft } from "assets/images/icon-arrow-left.svg";
-
+import StatusBar from "components/organisms/StatusBar/StatusBar";
 type InvoiceProps = {};
 
 const InvoiceView = (props: InvoiceProps) => {
@@ -35,6 +35,7 @@ const InvoiceView = (props: InvoiceProps) => {
         <IconLeft />
         Go back
       </StyledLink>
+      {invoice && <StatusBar status={invoice.status} />}
     </div>
   );
 };
