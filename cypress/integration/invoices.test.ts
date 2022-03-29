@@ -1,15 +1,11 @@
 describe("Invoices view", () => {
   beforeEach(() => {
     cy.resetInvoicesDB();
-    cy.visit("/");
-    cy.logout();
     cy.login("0NkQafvuOo5jySTN8Bx6GcThDUzp");
-  });
-
-  beforeEach(function () {
     cy.fixture("invoice").then(function (data) {
       this.invoice = data;
     });
+    cy.visit("/");
   });
 
   it("Can add draft invoice", () => {
