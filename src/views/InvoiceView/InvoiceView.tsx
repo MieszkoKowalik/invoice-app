@@ -4,7 +4,7 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Invoice } from "types";
 import { useState } from "react";
-import { StyledLink } from "./InvoiceView.style";
+import { StyledLink, Wrapper } from "./InvoiceView.style";
 import { ReactComponent as IconLeft } from "assets/images/icon-arrow-left.svg";
 import StatusBar from "components/organisms/StatusBar/StatusBar";
 import Loader from "components/molecules/Loader/Loader";
@@ -40,13 +40,13 @@ const InvoiceView = (props: InvoiceProps) => {
   }
 
   return (
-    <div>
+    <Wrapper>
       <StyledLink to="/">
         <IconLeft />
         Go back
       </StyledLink>
       {invoice && <StatusBar status={invoice.status} />}
-    </div>
+    </Wrapper>
   );
 };
 
