@@ -7,10 +7,13 @@ import { useState } from "react";
 import { StyledLink } from "./InvoiceView.style";
 import { ReactComponent as IconLeft } from "assets/images/icon-arrow-left.svg";
 import StatusBar from "components/organisms/StatusBar/StatusBar";
+import Loader from "components/molecules/Loader/Loader";
+
 type InvoiceProps = {};
 
 const InvoiceView = (props: InvoiceProps) => {
   const [invoice, setInvoice] = useState<Invoice | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
 
   useEffect(() => {
@@ -26,9 +29,16 @@ const InvoiceView = (props: InvoiceProps) => {
         }
       } catch (e) {
         console.log(e);
+      } finally {
+        setIsLoading(false);
       }
     })();
   }, [id]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <div>
       <StyledLink to="/">
