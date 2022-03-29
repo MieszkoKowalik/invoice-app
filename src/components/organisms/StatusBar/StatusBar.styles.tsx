@@ -4,6 +4,10 @@ import { ContentWrapper } from "components/molecules/ContentWrapper/ContentWrapp
 export const Wrapper = styled(ContentWrapper)`
   display: flex;
   justify-content: space-between;
+
+  @media ${({ theme }) => theme.breakpoints.m} {
+    padding: 20px 32px;
+  }
 `;
 
 export const StatusWrapper = styled.div`
