@@ -1,5 +1,6 @@
 import Badge from "components/atoms/Badge/Badge";
 import styled from "styled-components";
+import { Id } from "components/atoms/Id/Id";
 
 export const Wrapper = styled.div`
   padding: 24px;
@@ -29,15 +30,8 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const IdSpan = styled.span`
-  font-size: ${({ theme }) => theme.fontSize.s};
-  color: ${({ theme }) => theme.colors.neutral[900]};
-  font-weight: 700;
-
-  &::before {
-    content: "#";
-    color: ${({ theme }) => theme.colors.primary[300]};
-  }
+export const StyledId = styled(Id)`
+  grid-area: id;
 `;
 
 export const DateSpan = styled.span`

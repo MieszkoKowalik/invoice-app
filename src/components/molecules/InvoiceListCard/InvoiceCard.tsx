@@ -4,7 +4,7 @@ import { Invoice } from "types";
 import { ReactComponent as ArrowRight } from "assets/images/icon-arrow-right.svg";
 import {
   Wrapper,
-  IdSpan,
+  StyledId,
   DateSpan,
   ClientSpan,
   AmountSpan,
@@ -23,7 +23,7 @@ const InvoiceCard = ({ invoice }: InvoiceCardProps) => {
 
   return (
     <Wrapper>
-      <IdSpan>{invoice.id}</IdSpan>
+      <StyledId>{invoice.id}</StyledId>
       <DateSpan> Due {formatDateString(invoice.paymentDue)}</DateSpan>
       <ClientSpan>{invoice.clientName}</ClientSpan>
       <AmountSpan>{formatNumberToGBP(invoice.total)}</AmountSpan>
