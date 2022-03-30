@@ -11,6 +11,7 @@ import Loader from "components/molecules/Loader/Loader";
 import InvoiceControls from "components/molecules/InvoiceControls/InvoiceControls";
 import { useTheme } from "styled-components";
 import useMediaQuery from "hooks/useMediaQuery";
+import InvoiceDetails from "components/organisms/InvoiceDetails/InvoiceDetails";
 
 type InvoiceProps = {};
 
@@ -54,6 +55,7 @@ const InvoiceView = (props: InvoiceProps) => {
         <>
           <StatusBar status={invoice.status} />
 
+          <InvoiceDetails invoice={invoice} />
           {!isTablet && (
             <ControlsWrapper>
               <InvoiceControls status={invoice.status} />
