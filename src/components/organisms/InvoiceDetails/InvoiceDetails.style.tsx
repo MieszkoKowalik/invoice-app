@@ -48,6 +48,14 @@ export const InfoWrapper = styled.div<InfoWrapperProps>`
   gap: ${({ smallGap }) => (smallGap ? "8px" : "12px")};
 `;
 
+export const SentTo = styled(InfoWrapper)`
+  grid-column: 1/-1;
+
+  @media ${({ theme }) => theme.breakpoints.m} {
+    grid-column: unset;
+  }
+`;
+
 export const Heading = styled.h3`
   ${typography.s}
   font-weight: 500;
