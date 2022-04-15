@@ -21,6 +21,7 @@ import {
   ItemWrapper,
   ItemText,
   ItemHeader,
+  SentTo,
 } from "./InvoiceDetails.style";
 
 type InvoiceDetailsProps = {
@@ -73,10 +74,10 @@ const InvoiceDetails = ({ invoice }: InvoiceDetailsProps) => {
           </InfoWrapper>
         </InfoWrapper>
 
-        <InfoWrapper>
+        <SentTo>
           <Heading>Sent to</Heading>
           <PrimaryInfo>{invoice.clientEmail}</PrimaryInfo>
-        </InfoWrapper>
+        </SentTo>
       </MiddleWrapper>
 
       <ItemsWrapper>

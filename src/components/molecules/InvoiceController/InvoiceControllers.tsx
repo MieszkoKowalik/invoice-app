@@ -1,12 +1,12 @@
-import { Wrapper } from "./InvoiceControls.styles";
+import { Wrapper } from "./InvoiceController.styles";
 import { Button } from "components/atoms/Button/Button";
 import { Status } from "types";
 
-type InvoiceControlsProps = {
+type InvoiceControllerProps = {
   status: Status;
 };
 
-const InvoiceControls = ({ status }: InvoiceControlsProps) => {
+const InvoiceController = ({ status }: InvoiceControllerProps) => {
   return (
     <Wrapper>
       {status !== "paid" && <Button variant="secondary">Edit</Button>}
@@ -16,4 +16,4 @@ const InvoiceControls = ({ status }: InvoiceControlsProps) => {
   );
 };
 
-export default InvoiceControls;
+export default InvoiceController;

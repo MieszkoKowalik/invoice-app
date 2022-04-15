@@ -4,11 +4,11 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { Invoice } from "types";
 import { useState } from "react";
-import { StyledLink, Wrapper, ControlsWrapper } from "./InvoiceView.style";
+import { StyledLink, Wrapper, ControllerWrapper } from "./InvoiceView.style";
 import { ReactComponent as IconLeft } from "assets/images/icon-arrow-left.svg";
 import StatusBar from "components/organisms/StatusBar/StatusBar";
 import Loader from "components/molecules/Loader/Loader";
-import InvoiceControls from "components/molecules/InvoiceControls/InvoiceControls";
+import InvoiceController from "components/molecules/InvoiceController/InvoiceControllers";
 import { useTheme } from "styled-components";
 import useMediaQuery from "hooks/useMediaQuery";
 import InvoiceDetails from "components/organisms/InvoiceDetails/InvoiceDetails";
@@ -57,9 +57,9 @@ const InvoiceView = (props: InvoiceProps) => {
 
           <InvoiceDetails invoice={invoice} />
           {!isTablet && (
-            <ControlsWrapper>
-              <InvoiceControls status={invoice.status} />
-            </ControlsWrapper>
+            <ControllerWrapper>
+              <InvoiceController status={invoice.status} />
+            </ControllerWrapper>
           )}
         </>
       )}

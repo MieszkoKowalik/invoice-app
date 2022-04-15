@@ -29,7 +29,7 @@ export const Wrapper = styled.div`
   }
 `;
 
-export const ControlsWrapper = styled.div`
+export const ControllerWrapper = styled.div`
   position: fixed;
   bottom: 0;
   right: 0;

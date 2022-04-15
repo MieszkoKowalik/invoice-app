@@ -1,13 +1,13 @@
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import InvoiceControls from "./InvoiceControls";
+import InvoiceController from "./InvoiceControllers";
 
 export default {
-  title: "components/molecules/InvoiceControls",
-  component: InvoiceControls,
-} as ComponentMeta<typeof InvoiceControls>;
+  title: "components/molecules/InvoiceController",
+  component: InvoiceController,
+} as ComponentMeta<typeof InvoiceController>;
 
-const Template: ComponentStory<typeof InvoiceControls> = (args) => (
-  <InvoiceControls {...args} />
+const Template: ComponentStory<typeof InvoiceController> = (args) => (
+  <InvoiceController {...args} />
 );
 
 export const Paid = Template.bind({});
