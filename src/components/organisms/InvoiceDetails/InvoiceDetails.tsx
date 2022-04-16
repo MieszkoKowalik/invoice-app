@@ -3,7 +3,7 @@ import { formatNumberToGBP } from "helpers/formatNumberToGBP";
 import useMediaQuery from "hooks/useMediaQuery";
 import React from "react";
 import { useTheme } from "styled-components";
-import { Invoice } from "types";
+import { Invoice } from "types/Invoice";
 import {
   Wrapper,
   StyledId,

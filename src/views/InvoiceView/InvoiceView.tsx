@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { Invoice } from "types";
+import { Invoice } from "types/Invoice";
 import { useState } from "react";
 import { StyledLink, Wrapper, ControllerWrapper } from "./InvoiceView.style";
 import { ReactComponent as IconLeft } from "assets/images/icon-arrow-left.svg";

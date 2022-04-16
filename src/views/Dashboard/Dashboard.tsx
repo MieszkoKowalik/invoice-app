@@ -7,7 +7,7 @@ import {
   NewInvoiceButton,
   StyledTitle,
 } from "./Dashboard.styles";
-import { Invoice } from "types";
+import { Invoice } from "types/Invoice";
 import { db } from "../../firebase";
 import { collection, onSnapshot, setDoc, doc } from "firebase/firestore";
 import InvoiceList from "components/organisms/InvoiceList/InvoiceList";

@@ -3,7 +3,7 @@ import { StyledUl, StyledLink } from "./InvoiceList.styles";
 import EmptyList from "components/molecules/EmptyList/EmptyList";
 import { motion, Variants } from "framer-motion";
 
-import { Invoice } from "types";
+import { Invoice } from "types/Invoice";
 import { AppRoutes } from "types/AppRoutes";
 
 type InvoiceListProps = {
