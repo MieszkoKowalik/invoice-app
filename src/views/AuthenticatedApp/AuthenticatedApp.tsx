@@ -3,6 +3,8 @@ import { useLocation, Routes, Route } from "react-router-dom";
 import InvoiceView from "views/InvoiceView/InvoiceView";
 import Dashboard from "../Dashboard/Dashboard";
 
+import { AppRoutes } from "types/AppRoutes";
+
 type AuthenticatedAppProps = {};
 
 const AuthenticatedApp = (props: AuthenticatedAppProps) => {
@@ -11,8 +13,8 @@ const AuthenticatedApp = (props: AuthenticatedAppProps) => {
   return (
     <AnimatePresence exitBeforeEnter>
       <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/invoice/:id" element={<InvoiceView />} />
+        <Route path={AppRoutes.Home} element={<Dashboard />} />
+        <Route path={`${AppRoutes.Invoice}/:id`} element={<InvoiceView />} />
       </Routes>
     </AnimatePresence>
   );

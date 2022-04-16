@@ -13,6 +13,8 @@ import { useTheme } from "styled-components";
 import useMediaQuery from "hooks/useMediaQuery";
 import InvoiceDetails from "components/organisms/InvoiceDetails/InvoiceDetails";
 
+import { AppRoutes } from "types/AppRoutes";
+
 type InvoiceProps = {};
 
 const InvoiceView = (props: InvoiceProps) => {
@@ -47,7 +49,7 @@ const InvoiceView = (props: InvoiceProps) => {
 
   return (
     <Wrapper>
-      <StyledLink to="/">
+      <StyledLink to={AppRoutes.Home}>
         <IconLeft />
         Go back
       </StyledLink>
