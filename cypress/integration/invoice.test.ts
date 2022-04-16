@@ -1,3 +1,5 @@
+import { AppRoutes } from "../support/AppRoutes";
+
 describe("Invoice view", () => {
   beforeEach(function () {
     cy.resetInvoicesDB();
@@ -5,12 +7,12 @@ describe("Invoice view", () => {
     cy.fixture("invoice").then(function (data) {
       this.invoice = data;
       cy.callFirestore("set", `invoices/${this.invoice.id}`, this.invoice);
-      cy.visit(`/invoice/${this.invoice.id}`);
+      cy.visit(`${AppRoutes.Invoice}/${this.invoice.id}`);
     });
   });
 
   it("Redirects to home page on 'Go back' click", () => {
     cy.findByText("Go back").click();
-    cy.location("pathname").should("eq", `/`);
+    cy.location("pathname").should("eq", `${AppRoutes.Home}`);
   });
 });

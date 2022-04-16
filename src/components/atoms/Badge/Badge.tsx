@@ -1,5 +1,5 @@
 import { Wrapper } from "./Badge.styles";
-import { Status } from "types";
+import { Status } from "types/Invoice";
 
 export type BadgeProps = {
   variant: Status;

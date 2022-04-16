@@ -1,6 +1,6 @@
 import useMediaQuery from "hooks/useMediaQuery";
 import { useTheme } from "styled-components";
-import { Invoice } from "types";
+import { Invoice } from "types/Invoice";
 import { ReactComponent as ArrowRight } from "assets/images/icon-arrow-right.svg";
 import {
   Wrapper,

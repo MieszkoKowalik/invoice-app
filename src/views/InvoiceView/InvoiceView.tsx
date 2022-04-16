@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
-import { Invoice } from "types";
+import { Invoice } from "types/Invoice";
 import { useState } from "react";
 import { StyledLink, Wrapper, ControllerWrapper } from "./InvoiceView.style";
 import { ReactComponent as IconLeft } from "assets/images/icon-arrow-left.svg";
@@ -12,6 +12,9 @@ import InvoiceController from "components/molecules/InvoiceController/InvoiceCon
 import { useTheme } from "styled-components";
 import useMediaQuery from "hooks/useMediaQuery";
 import InvoiceDetails from "components/organisms/InvoiceDetails/InvoiceDetails";
+
+import { AppRoutes } from "types/AppRoutes";
+import { Collections } from "types/Collections";
 
 type InvoiceProps = {};
 
@@ -25,7 +28,7 @@ const InvoiceView = (props: InvoiceProps) => {
   useEffect(() => {
     if (!id) return;
     (async () => {
-      const docRef = doc(db, "invoices", id);
+      const docRef = doc(db, Collections.Invoices, id);
       try {
         const doc = await getDoc(docRef);
         if (doc.exists()) {
@@ -47,7 +50,7 @@ const InvoiceView = (props: InvoiceProps) => {
 
   return (
     <Wrapper>
-      <StyledLink to="/">
+      <StyledLink to={AppRoutes.Home}>
         <IconLeft />
         Go back
       </StyledLink>

@@ -1,6 +1,6 @@
 import { Wrapper } from "./InvoiceController.styles";
 import { Button } from "components/atoms/Button/Button";
-import { Status } from "types";
+import { Status } from "types/Invoice";
 
 type InvoiceControllerProps = {
   status: Status;

@@ -1,7 +1,7 @@
 import { Wrapper, StatusWrapper } from "./StatusBar.styles";
 import { Text } from "components/atoms/Text/Text";
 import Badge from "components/atoms/Badge/Badge";
-import { Status } from "types";
+import { Status } from "types/Invoice";
 import InvoiceController from "components/molecules/InvoiceController/InvoiceControllers";
 import { useTheme } from "styled-components";
 import useMediaQuery from "hooks/useMediaQuery";

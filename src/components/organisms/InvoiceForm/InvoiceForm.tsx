@@ -24,7 +24,7 @@ import { formatDateString } from "helpers/formatDateString";
 import { generateID } from "helpers/generateID";
 import { useEffect } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Invoice } from "types";
+import { Invoice } from "types/Invoice";
 
 type FormInputs = Invoice & {
   shouldValidate: boolean;

@@ -1,8 +1,10 @@
-import { Invoice } from "types";
 import InvoiceCard from "components/molecules/InvoiceListCard/InvoiceCard";
 import { StyledUl, StyledLink } from "./InvoiceList.styles";
 import EmptyList from "components/molecules/EmptyList/EmptyList";
 import { motion, Variants } from "framer-motion";
+
+import { Invoice } from "types/Invoice";
+import { AppRoutes } from "types/AppRoutes";
 
 type InvoiceListProps = {
   invoices: Invoice[];
@@ -42,7 +44,7 @@ const InvoiceList = ({ invoices }: InvoiceListProps) => {
           {invoices.map((invoice: Invoice) => {
             return (
               <motion.li key={invoice.id} variants={itemVariants}>
-                <StyledLink to={`invoice/${invoice.id}`}>
+                <StyledLink to={`${AppRoutes.Invoice}/${invoice.id}`}>
                   <InvoiceCard invoice={invoice} />
                 </StyledLink>
               </motion.li>

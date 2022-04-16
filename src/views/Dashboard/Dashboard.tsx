@@ -7,7 +7,6 @@ import {
   NewInvoiceButton,
   StyledTitle,
 } from "./Dashboard.styles";
-import { Invoice } from "types";
 import { db } from "../../firebase";
 import { collection, onSnapshot, setDoc, doc } from "firebase/firestore";
 import InvoiceList from "components/organisms/InvoiceList/InvoiceList";
@@ -17,6 +16,9 @@ import { getInvoiceLenghtMessage } from "helpers/getInvoiceLengthMessage";
 import { useTheme } from "styled-components";
 import { Variants } from "framer-motion";
 import Loader from "components/molecules/Loader/Loader";
+
+import { Invoice } from "types/Invoice";
+import { Collections } from "types/Collections";
 
 type DashboardProps = {};
 
@@ -53,7 +55,7 @@ const Dashboard = (props: DashboardProps) => {
 
   const addInvoice = async (data: Invoice) => {
     try {
-      await setDoc(doc(db, "invoices", data.id), data);
+      await setDoc(doc(db, Collections.Invoices, data.id), data);
     } catch (e) {
       console.error("Error while adding document: ", e);
     }
@@ -65,7 +67,7 @@ const Dashboard = (props: DashboardProps) => {
   };
 
   useEffect(() => {
-    const invoicesRef = collection(db, "invoices");
+    const invoicesRef = collection(db, Collections.Invoices);
     const unsub = onSnapshot(invoicesRef, (querySnapshot) => {
       const invoices = querySnapshot.docs.map(
         (invoice) => invoice.data() as Invoice

@@ -1,16 +1,17 @@
+import { AppRoutes } from "../support/AppRoutes";
+
 describe("login", () => {
   beforeEach(() => {
     cy.logout();
+    cy.visit(`${AppRoutes.Home}`);
   });
 
   it("Displays login page", () => {
-    cy.visit("/");
     cy.findByText("Log in").should("exist");
     cy.findByLabelText(/Email/).should("exist");
   });
 
   it("Shows errors when invalid data provided", () => {
-    cy.visit("/");
     cy.findByText("Log in").click();
     cy.findAllByText("Can't be empty").should("have.length", 2);
 
@@ -49,7 +50,6 @@ describe("login", () => {
   });
 
   it("Logins user when valid data provided", () => {
-    cy.visit("/");
     cy.findByLabelText("Email").type("Test123@test123.com");
     cy.findByLabelText("Password").type("Test123");
     cy.findByText("Log in").click();
