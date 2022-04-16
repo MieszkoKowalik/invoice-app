@@ -14,6 +14,7 @@ import useMediaQuery from "hooks/useMediaQuery";
 import InvoiceDetails from "components/organisms/InvoiceDetails/InvoiceDetails";
 
 import { AppRoutes } from "types/AppRoutes";
+import { Collections } from "types/Collections";
 
 type InvoiceProps = {};
 
@@ -27,7 +28,7 @@ const InvoiceView = (props: InvoiceProps) => {
   useEffect(() => {
     if (!id) return;
     (async () => {
-      const docRef = doc(db, "invoices", id);
+      const docRef = doc(db, Collections.Invoices, id);
       try {
         const doc = await getDoc(docRef);
         if (doc.exists()) {
