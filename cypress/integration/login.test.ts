@@ -1,7 +1,9 @@
+import { AppRoutes } from "../support/AppRoutes";
+
 describe("login", () => {
   beforeEach(() => {
     cy.logout();
-    cy.visit("/");
+    cy.visit(`${AppRoutes.Home}`);
   });
 
   it("Displays login page", () => {

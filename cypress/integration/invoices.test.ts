@@ -1,3 +1,5 @@
+import { AppRoutes } from "../support/AppRoutes";
+
 describe("Invoices view", () => {
   beforeEach(() => {
     cy.resetInvoicesDB();
@@ -5,7 +7,7 @@ describe("Invoices view", () => {
     cy.fixture("invoice").then(function (data) {
       this.invoice = data;
     });
-    cy.visit("/");
+    cy.visit(`${AppRoutes.Home}`);
   });
 
   it("Can add draft invoice", () => {
@@ -70,6 +72,9 @@ describe("Invoices view", () => {
   it("Redirects to invoice view on invoice click", function () {
     cy.callFirestore("set", `invoices/${this.invoice.id}`, this.invoice);
     cy.findByText(this.invoice.id).click();
-    cy.location("pathname").should("eq", `/invoice/${this.invoice.id}`);
+    cy.location("pathname").should(
+      "eq",
+      `${AppRoutes.Invoice}/${this.invoice.id}`
+    );
   });
 });
